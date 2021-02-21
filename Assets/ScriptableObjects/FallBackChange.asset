@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10fd574ebc6a74f4bacd963f716ecb08, type: 3}
-  m_Name: MeterPositionPingPong
+  m_Script: {fileID: 11500000, guid: 7cf8dde0b5591e94a942ecc6f257e378, type: 3}
+  m_Name: FallBackChange
   m_EditorClassIdentifier: 
-  minMaxValues: {x: -1, y: 1}
-  changeDuration: 0.5
-  changeEase: 1
-  changeEvent: {fileID: 11400000, guid: 8983e78e6a325ca4e88e707be39dca6e, type: 2}
+  canRaiseOtherEvents: 0
+  eventsThatWillAlsoBeRaised: []
+  eventValue: 0

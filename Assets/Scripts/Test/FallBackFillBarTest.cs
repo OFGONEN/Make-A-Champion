@@ -5,9 +5,9 @@ using FFStudio;
 using NaughtyAttributes;
 using DG.Tweening;
 
-public class FillBarTest : MonoBehaviour
+public class FallBackFillBarTest : MonoBehaviour
 {
-	public SharedFloatPropertyTweener fillingAmount;
+	public SharedFloatPropertyFallBackTweener fillingAmount;
 	public float setValue;
 
 	private void Awake()

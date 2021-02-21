@@ -41,7 +41,6 @@ namespace FFStudio
 			var _changeEvent = ( meterPositionChangeListener.gameEvent as FloatGameEvent );
 
 			var _position = _changeEvent.eventValue * meterMinMaxValues.y;
-
 			_position = Mathf.Clamp( _position, meterMinMaxValues.x, meterMinMaxValues.y );
 
 			uiMeterImage.rectTransform.anchoredPosition = _position * Vector2.right;

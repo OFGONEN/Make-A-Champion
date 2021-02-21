@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace FFStudio
@@ -84,7 +85,6 @@ namespace FFStudio
 		{
 			return set.stack.Pop();
 		}
-        
 		public static void EmptyMethod()
 		{
 
