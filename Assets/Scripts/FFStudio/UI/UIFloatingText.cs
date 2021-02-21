@@ -8,8 +8,9 @@ public class UIFloatingText : UIText
 
 
 	[HideInInspector] public Color textColor;
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		textColor = textRenderer.color;
 	}
 	private void OnDisable()

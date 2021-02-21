@@ -3,6 +3,7 @@ using NaughtyAttributes;
 
 namespace FFStudio
 {
+	[CreateAssetMenu( fileName = "GameSettings", menuName = "FF/Data/GameSettings" )]
     public class GameSettings : ScriptableObject
     {
         public int maxLevelCount;

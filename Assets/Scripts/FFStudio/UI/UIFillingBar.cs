@@ -4,11 +4,13 @@ using UnityEngine.UI;
 
 namespace FFStudio
 {
-	public class UIFillingBar : MonoBehaviour
+	public class UIFillingBar : UIEntity
 	{
 		#region Fields
-		public Image uiFillingImage;
+		[Header( "Event Listeners" )]
 		public EventListenerDelegateResponse fillingAmountChangeListener;
+		[Header( "UI Elements" )]
+		public Image uiFillingImage;
 		#endregion
 
 		#region Unity API
@@ -16,8 +18,9 @@ namespace FFStudio
 		{
 			fillingAmountChangeListener.OnEnable();
 		}
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			fillingAmountChangeListener.response = FillingAmountChange;
 		}
 		private void OnDisable()

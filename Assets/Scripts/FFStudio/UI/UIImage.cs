@@ -8,8 +8,9 @@ namespace FFStudio
 		[SerializeField]
 		private Image imageRenderer;
 		Vector2 imageSizeDelta;
-		private void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			imageSizeDelta = uiTransform.sizeDelta;
 		}
 
