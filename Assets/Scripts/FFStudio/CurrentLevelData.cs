@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace FFStudio
 {
+	[CreateAssetMenu( fileName = "CurrentLevelData", menuName = "FF/Data/CurrentLevelData" )]
     public class CurrentLevelData : ScriptableObject
     {
         public int currentLevel;

@@ -8,8 +8,9 @@ public class UIFloatingText : UIText
 
 
 	[HideInInspector] public Color textColor;
-	private void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
 		textColor = textRenderer.color;
 	}
 	private void OnDisable()
@@ -18,7 +19,7 @@ public class UIFloatingText : UIText
 	}
 	public override Tween GoTargetPosition()
 	{
-		textRenderer.DOFade( 0, gameSettings.uiFloatingEntityTweenDuration ).SetEase( Ease.InExpo );
-		return uiTransform.DOMove( destinationTransform.position, gameSettings.uiFloatingEntityTweenDuration );
+		textRenderer.DOFade( 0, gameSettings.uiFloatingEntityMoveTweenDuration ).SetEase( Ease.InExpo );
+		return uiTransform.DOMove( destinationTransform.position, gameSettings.uiFloatingEntityMoveTweenDuration );
 	}
 }

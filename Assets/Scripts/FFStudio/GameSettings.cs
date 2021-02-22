@@ -1,14 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using NaughtyAttributes;
 
 namespace FFStudio
 {
+	[CreateAssetMenu( fileName = "GameSettings", menuName = "FF/Data/GameSettings" )]
     public class GameSettings : ScriptableObject
     {
         public int maxLevelCount;
-        public float uiEntityTweenDuration;
-        public float uiFloatingEntityTweenDuration;
+		[Foldout( "UI Settings" )] public float uiEntityScaleTweenDuration;
+		[Foldout( "UI Settings" )] public float uiEntityMoveTweenDuration;
+		[Foldout( "UI Settings" )] public float uiFloatingEntityMoveTweenDuration;
+		[Foldout( "UI Settings" )] public Vector3 uiModelViewSpinAxis;
+		[Foldout( "UI Settings" )] public float uiModelViewSpinSpeed;
         [Tooltip("Percentage of the screen to register a swipe")]
         public int swipeThreshold;
     }
