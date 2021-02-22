@@ -7,7 +7,7 @@ namespace FFStudio
 	public class UISelectionLevelData : LevelData
 	{
 		public SelectionObjectData[] selectionObjects;
-
+		public SelectionObjectData unlockedObject;
 		[Serializable]
 		public struct SelectionObjectData
 		{
