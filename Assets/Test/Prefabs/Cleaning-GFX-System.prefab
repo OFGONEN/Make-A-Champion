@@ -50,3 +50,6 @@ MonoBehaviour:
   standByList: {fileID: 11400000, guid: 121182aac65002c45a878c84c836e593, type: 2}
   readyToBeWipedList: {fileID: 11400000, guid: 786184a81339025489c843169c1c189a, type: 2}
   state: 0
+  bubblePrefabs:
+  - {fileID: 2508655699377503545, guid: 36e91bf1cda81a245b1a4dac5b4a279b, type: 3}
+  - {fileID: 2508655699377503545, guid: 1d6937784f56b13438d037fa035568be, type: 3}

@@ -20,7 +20,7 @@ public class CleaningGFXSystem : MonoBehaviour
     public CleaningGFXSystemState state = CleaningGFXSystemState.CleaningWithBubbles;
 
 	[ Header( "Bubbles" ) ]
-	public GameObject bubblePrefab;
+	public GameObject[] bubblePrefabs;
 #endregion
 
 #region Unity API
@@ -54,7 +54,7 @@ public class CleaningGFXSystem : MonoBehaviour
 	private void Update()
 	{
 		if( Input.GetKeyDown( KeyCode.Return ) )
-			SimplePool.Spawn( bubblePrefab, Vector3.zero, Quaternion.identity );
+			SimplePool.Spawn( bubblePrefabs[ Random.Range( 0, bubblePrefabs.Length ) ], Vector3.zero, Quaternion.identity );
 	}
 #endif
 
