@@ -54,14 +54,17 @@ public class CleaningGFXSystem : MonoBehaviour
 	private void Update()
 	{
 		if( Input.GetKeyDown( KeyCode.Return ) )
-			SimplePool.Spawn( bubblePrefabs[ Random.Range( 0, bubblePrefabs.Length ) ], Vector3.zero, Quaternion.identity );
+			CreateBubble( Vector3.zero );
 	}
 #endif
 
 #endregion
 
 #region API
-    /* CleaningGFXSystem component is autonomous; Hence, no public API to control it. */
+	private void CreateBubble( Vector3 atPosition )
+	{
+		SimplePool.Spawn( bubblePrefabs[ Random.Range( 0, bubblePrefabs.Length ) ], atPosition, Quaternion.identity );
+	}
 #endregion
 
 #region Implementation
