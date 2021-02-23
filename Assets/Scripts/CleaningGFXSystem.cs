@@ -18,6 +18,9 @@ public class CleaningGFXSystem : MonoBehaviour
 
     [ Header( "State" ) ]
     public CleaningGFXSystemState state = CleaningGFXSystemState.CleaningWithBubbles;
+
+	[ Header( "Bubbles" ) ]
+	public GameObject bubblePrefab;
 #endregion
 
 #region Unity API
@@ -45,6 +48,16 @@ public class CleaningGFXSystem : MonoBehaviour
     {
 		aDirtRemovedFromASet.response = OnADirtRemoved;
     }
+
+#if UNITY_EDITOR
+	// TODO: Remove when testing is done.
+	private void Update()
+	{
+		if( Input.GetKeyDown( KeyCode.Return ) )
+			SimplePool.Spawn( bubblePrefab, Vector3.zero, Quaternion.identity );
+	}
+#endif
+
 #endregion
 
 #region API
