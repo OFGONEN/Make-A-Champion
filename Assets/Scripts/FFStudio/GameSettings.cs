@@ -14,5 +14,8 @@ namespace FFStudio
 		[Foldout( "UI Settings" )] public float uiModelViewSpinSpeed;
         [Tooltip("Percentage of the screen to register a swipe")]
         public int swipeThreshold;
-    }
+
+		[ Tooltip( "How much health will be depleted per second ? (Total starting health is always 100)" ) ]
+		[ Foldout( "Cleaning GFX System" ) ] public float dirtDepletionRate = 20.0f;
+	}
 }
