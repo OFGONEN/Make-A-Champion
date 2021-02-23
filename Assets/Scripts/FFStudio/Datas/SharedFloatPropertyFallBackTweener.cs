@@ -54,6 +54,12 @@ namespace FFStudio
 			if( valueChangeTween != null )
 				valueChangeTween.Kill();
 		}
+		public void CompleteTween()
+		{
+			if( valueChangeTween != null )
+				valueChangeTween.Kill();
+
+		}
 		#endregion
 
 		#region Implementation
