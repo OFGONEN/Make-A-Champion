@@ -51,7 +51,7 @@ public class CleaningGFXSystem : MonoBehaviour
 #endregion
 
 #region API
-	private void CreateBubble( Vector3 atPosition )
+	public void CreateBubble( Vector3 atPosition )
 	{
 		SimplePool.Spawn( bubblePrefabs[ Random.Range( 0, bubblePrefabs.Length ) ], atPosition, Quaternion.identity );
 	}
