@@ -12,7 +12,10 @@ namespace FFStudio
 		[Foldout( "UI Settings" )] public float uiFloatingEntityMoveTweenDuration;
 		[Foldout( "UI Settings" )] public Vector3 uiModelViewSpinAxis;
 		[Foldout( "UI Settings" )] public float uiModelViewSpinSpeed;
+
         [Tooltip("Percentage of the screen to register a swipe")]
         public int swipeThreshold;
-    }
+
+		public float packingSearchDistance;
+	}
 }
