@@ -19,5 +19,5 @@ MonoBehaviour:
   uiModelViewSpinAxis: {x: 0, y: 1, z: 0}
   uiModelViewSpinSpeed: 10
   swipeThreshold: 0
-  packingDistance: 1
-  packingSearchDistance: 3
+  packingItemSearchDistance: 3
+  packingWeightSearchDistance: 1.5

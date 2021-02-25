@@ -16,6 +16,7 @@ namespace FFStudio
         [Tooltip("Percentage of the screen to register a swipe")]
         public int swipeThreshold;
 
-		public float packingSearchDistance;
+		public float packingItemSearchDistance;
+		public float packingWeightSearchDistance;
 	}
 }

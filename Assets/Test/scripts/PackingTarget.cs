@@ -48,10 +48,4 @@ public class PackingTarget : MonoBehaviour
 	}
 
 	#endregion
-
-	[Button]
-	private void Select()
-	{
-		Select( Color.red );
-	}
 }

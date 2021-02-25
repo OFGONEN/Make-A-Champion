@@ -68,6 +68,7 @@ public class PackableItemTest : MonoBehaviour
 		hoverValue = startPosition.y / 2f;
 	}
 	#endregion
+
 	#region Implementation
 	void Hover()
 	{
@@ -100,7 +101,7 @@ public class PackableItemTest : MonoBehaviour
 
 		onDeSelect = ReturnDefault;
 
-		if( Mathf.Abs( _closestDistance ) <= gameSettings.packingSearchDistance )
+		if( Mathf.Abs( _closestDistance ) <= gameSettings.packingItemSearchDistance )
 		{
 
 			if( _closestID == targetPackingTarget.GetInstanceID() )
