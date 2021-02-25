@@ -677,6 +677,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 66506838}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: bubblePrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: bubblePrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2508655699377503545, guid: 36e91bf1cda81a245b1a4dac5b4a279b, type: 3}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: bubblePrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2508655699377503545, guid: 1d6937784f56b13438d037fa035568be, type: 3}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: bubblePrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 2508655699377503545, guid: 0bca0ca86792b3547927aafda3285849, type: 3}
+    - target: {fileID: 5387822662136717425, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
+      propertyPath: bubblePrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2508655699377503545, guid: 35ecf2f136ca4c0458e8dd2cc3ac4ed4, type: 3}
     - target: {fileID: 5387822662136717426, guid: 5d168b4a20ddb0b4396a4e8576d01118, type: 3}
       propertyPath: m_Name
       value: Cleaning-GFX-System

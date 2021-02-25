@@ -48,16 +48,6 @@ public class CleaningGFXSystem : MonoBehaviour
     {
 		aDirtRemovedFromASet.response = OnADirtRemoved;
     }
-
-#if UNITY_EDITOR
-	// TODO: Remove when testing is done.
-	private void Update()
-	{
-		if( Input.GetKeyDown( KeyCode.Return ) )
-			CreateBubble( Vector3.zero );
-	}
-#endif
-
 #endregion
 
 #region API
@@ -72,14 +62,14 @@ public class CleaningGFXSystem : MonoBehaviour
     {
 		if( state == CleaningGFXSystemState.CleaningWithBubbles && standByList.itemList.Count == 0 )
 		{
+            FFLogger.Log( name + ": All dirt have been depleted by bubbles. Switching to phase 2." );
 			cleaningPhase1Completed.Raise();
 			state = CleaningGFXSystemState.WipingWithCloth;
-            FFLogger.Log( name + ": All dirt have been depleted by bubbles. Switching to phase 2." );
 		}
 		else if( state == CleaningGFXSystemState.WipingWithCloth && readyToBeWipedList.itemList.Count == 0 )
 		{
+			FFLogger.Log( name + ": All dirt have been destroyed by the cloth. Both phases are completed." );
 			cleaningPhase2Completed.Raise();
-			FFLogger.Log( name + ": All dirt have been destroyed by the cloth. System work finished." );
 		}
 	}
 #endregion

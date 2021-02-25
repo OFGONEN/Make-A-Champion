@@ -36,16 +36,7 @@ public class Dirt : MonoBehaviour
 
     private void OnTriggerEnter( Collider other )
     {
-#if UNITY_EDITOR
-        if( other.CompareTag( "Bubble" ) )
-            FFLogger.Log( name + "'s OnTriggerEnter: And a Bubble triggered it!" );
-        else if( other.CompareTag( "Cloth" ) )
-            FFLogger.Log( name + "'s Dirt.OnTriggerEnter: And a Cloth triggered it!" );
-        else
-            FFLogger.Log( name + "'s Dirt.OnTriggerEnter: is called!" );
-#endif
-
-        /* Phase 1: */
+		/* Phase 1: */
         if( other.CompareTag( "Bubble" ) )
 		{
 			if( triggeringBubbleCount == 0)
@@ -75,7 +66,7 @@ public class Dirt : MonoBehaviour
 			triggeringBubbleCount--;
 
             if( triggeringBubbleCount == 0 )
-			    StopHealthDepletion();
+				StopHealthDepletion();
 		}
 	}
 #endregion
