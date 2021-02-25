@@ -22,3 +22,4 @@ MonoBehaviour:
   dirtDepletionRate: 10
   bubbleSpreadForceMultiplier: {x: 3, y: 8}
   bubbleDestroyTweenDuration: 1
+  particleContributionToLiquidPercentage: 0.5

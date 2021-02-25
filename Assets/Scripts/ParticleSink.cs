@@ -9,7 +9,7 @@ public class ParticleSink : MonoBehaviour
 {
 #region Fields
 	[ Header( "Modified Shared Data" ) ]
-	public SharedFloatProperty mixLiquidPercentage;
+	public SharedFloatProperty liquidFillPercentage;
 
 	[ Header( "Take Settings From" ), Expandable ]
 	public GameSettings gameSettings;
@@ -32,11 +32,11 @@ public class ParticleSink : MonoBehaviour
 		for( int i = 0; i < numberOfEnteringParticles; i++ )
 		{
 			ParticleSystem.Particle particle = particles[ i ];
-#if UNITY_EDITOR
-			particle.startColor = new Color32( 255, 0, 0, 255 ); /* FOR VISUALIZATION */
-#endif
+// #if UNITY_EDITOR
+// 			particle.startColor = new Color32( 255, 0, 0, 255 ); /* FOR VISUALIZATION */
+// #endif
 			particles[ i ] = particle;
-			mixLiquidPercentage.Value += gameSettings.particleContributionToLiquidPercentage;
+			liquidFillPercentage.Value += gameSettings.particleContributionToLiquidPercentage;
 		}
         
 		particleSystem.SetTriggerParticles( ParticleSystemTriggerEventType.Enter, particles );
