@@ -85,6 +85,24 @@ namespace FFStudio
 		{
 			return set.stack.Pop();
 		}
+
+		public static void LookAtOverTime( this Transform baseTransform, Vector3 targetPosition, float speed )
+		{
+			var _directionVector = targetPosition - baseTransform.position;
+			var _step = speed * Time.deltaTime;
+
+			Vector3 _newDirection = Vector3.RotateTowards( baseTransform.forward, _directionVector, _step, 0.0f );
+
+			baseTransform.rotation = Quaternion.LookRotation( _newDirection );
+		}
+		public static void LookAtDirectionOverTime( this Transform baseTransform, Vector3 direction, float speed )
+		{
+			var _step = speed * Time.deltaTime;
+
+			Vector3 _newDirection = Vector3.RotateTowards( baseTransform.forward, direction, _step, 0.0f );
+
+			baseTransform.rotation = Quaternion.LookRotation( _newDirection );
+		}
 		public static void EmptyMethod()
 		{
 

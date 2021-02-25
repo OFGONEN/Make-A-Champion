@@ -12,6 +12,7 @@ namespace FFStudio
 		[Foldout( "UI Settings" )] public float uiFloatingEntityMoveTweenDuration;
 		[Foldout( "UI Settings" )] public Vector3 uiModelViewSpinAxis;
 		[Foldout( "UI Settings" )] public float uiModelViewSpinSpeed;
+
         [Tooltip("Percentage of the screen to register a swipe")]
         public int swipeThreshold;
 
@@ -20,5 +21,8 @@ namespace FFStudio
 		[ Foldout( "Cleaning GFX System" ), MinMaxSlider( 0.1f, 10.0f ) ] 
         public Vector2 bubbleSpreadForceMultiplier = new Vector2( 3.0f, 3.0f );
 		[ Foldout( "Cleaning GFX System" ), Range( 0.1f, 3.0f ) ] public float bubbleDestroyTweenDuration = 1.0f;
+
+		public float packingItemSearchDistance;
+		public float packingWeightSearchDistance;
 	}
 }
