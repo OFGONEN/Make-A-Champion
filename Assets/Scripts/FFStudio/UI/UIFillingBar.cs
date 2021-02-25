@@ -22,6 +22,7 @@ namespace FFStudio
 		{
 			base.Awake();
 			fillingAmountChangeListener.response = FillingAmountChange;
+			uiFillingImage.fillAmount = 0;
 		}
 		private void OnDisable()
 		{
