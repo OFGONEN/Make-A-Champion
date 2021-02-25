@@ -19,3 +19,6 @@ MonoBehaviour:
   uiModelViewSpinAxis: {x: 0, y: 1, z: 0}
   uiModelViewSpinSpeed: 10
   swipeThreshold: 0
+  dirtDepletionRate: 10
+  bubbleSpreadForceMultiplier: {x: 3, y: 8}
+  bubbleDestroyTweenDuration: 1
