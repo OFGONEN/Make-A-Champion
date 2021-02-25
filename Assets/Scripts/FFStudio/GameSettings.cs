@@ -20,5 +20,7 @@ namespace FFStudio
 		[ Foldout( "Cleaning GFX System" ), MinMaxSlider( 0.1f, 10.0f ) ] 
         public Vector2 bubbleSpreadForceMultiplier = new Vector2( 3.0f, 3.0f );
 		[ Foldout( "Cleaning GFX System" ), Range( 0.1f, 3.0f ) ] public float bubbleDestroyTweenDuration = 1.0f;
+		
+		[ Foldout( "Pouring GFX System" ), Range( 0.1f, 3.0f ) ] public float particleContributionToLiquidPercentage = 1.0f;
 	}
 }
