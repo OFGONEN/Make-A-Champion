@@ -546,7 +546,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 306596039949826415, guid: 4f0f2694ff525e6489e51975a7a4e28a, type: 3}
       propertyPath: m_Name
-      value: water_particle_fx
+      value: liquid_particle_fx
+      objectReference: {fileID: 0}
+    - target: {fileID: 306596039949826415, guid: 4f0f2694ff525e6489e51975a7a4e28a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f0f2694ff525e6489e51975a7a4e28a, type: 3}
@@ -607,8 +611,69 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4458010265438885784, guid: 67ad7d3b00e78ec44b1866a1cc1eea36, type: 3}
       propertyPath: m_Name
-      value: water_bottle
+      value: liquid_bottle
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4458010265438885785, guid: 67ad7d3b00e78ec44b1866a1cc1eea36, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 67ad7d3b00e78ec44b1866a1cc1eea36, type: 3}
+--- !u!1001 &9107354638559243190
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.385
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.679
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.106
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113720, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5240127555319113721, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: TriggerModule.primitives.Array.data[1]
+      value: 
+      objectReference: {fileID: 746797590}
+    - target: {fileID: 5240127555319113724, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}
+      propertyPath: m_Name
+      value: dust_particle_fx
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c3697e4dd001ac43ba470fcb9dc0052, type: 3}

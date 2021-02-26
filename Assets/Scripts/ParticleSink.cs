@@ -3,7 +3,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
-using NaughtyAttributes;
 
 public class ParticleSink : MonoBehaviour
 {
@@ -11,10 +10,10 @@ public class ParticleSink : MonoBehaviour
 	[ Header( "Modified Shared Data" ) ]
 	public SharedFloatProperty liquidFillPercentage;
 
-	[ Header( "Take Settings From" ), Expandable ]
-	public GameSettings gameSettings;
+	[ Header( "Parameters" ) ]
+	[ Range( 0.01f, 1.0f ) ] public float particleContributionToLiquidPercentage = 0.5f;
 
-    private new ParticleSystem particleSystem;
+	private new ParticleSystem particleSystem;
 #endregion
 
 #region Unity API
@@ -28,18 +27,7 @@ public class ParticleSink : MonoBehaviour
 		List< ParticleSystem.Particle > particles = new List< ParticleSystem.Particle >();
 
 		int numberOfEnteringParticles = particleSystem.GetTriggerParticles( ParticleSystemTriggerEventType.Enter, particles );
-
-		for( int i = 0; i < numberOfEnteringParticles; i++ )
-		{
-			ParticleSystem.Particle particle = particles[ i ];
-// #if UNITY_EDITOR
-// 			particle.startColor = new Color32( 255, 0, 0, 255 ); /* FOR VISUALIZATION */
-// #endif
-			particles[ i ] = particle;
-			liquidFillPercentage.Value += gameSettings.particleContributionToLiquidPercentage;
-		}
-        
-		particleSystem.SetTriggerParticles( ParticleSystemTriggerEventType.Enter, particles );
+		liquidFillPercentage.Value += numberOfEnteringParticles * particleContributionToLiquidPercentage;
     }
 #endregion
 
