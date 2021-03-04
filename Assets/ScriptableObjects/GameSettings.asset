@@ -24,3 +24,4 @@ MonoBehaviour:
   bubbleDestroyTweenDuration: 1
   packingItemSearchDistance: 3
   packingWeightSearchDistance: 1.5
+  particleContributionToLiquidPercentage: 0.5
