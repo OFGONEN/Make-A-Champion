@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public GameEvent levelRevealed;
+	public GameEvent loadNewLevel;
 
 	[Header( "UI Elements" )]
 	public Image backgroundRenderer;
@@ -53,11 +54,12 @@ public class UIManager : MonoBehaviour
 	public void ItemUnlockedContinue()
 	{
 		uiItemUnlocked.interactable = false;
-
 		uiLevelCompleted.gameObject.SetActive( false );
 
+
+
 		FFLogger.Log( "Load New Level" );
-		//TODO: Load new level 
+		loadNewLevel.Raise();
 	}
 	public void LevelCompleteContinue()
 	{
@@ -73,6 +75,11 @@ public class UIManager : MonoBehaviour
 	#region Implementation
 	void LevelCompleteResponse()
 	{
+		var sequence = DOTween.Sequence();
+		sequence.Append( levelText.GoStartPosition() );
+		sequence.Join( uiLevelProgression.GoStartPosition() );
+
+
 		uiLevelCompleted.gameObject.SetActive( true );
 		uiItemUnlocked.gameObject.SetActive( true );
 
@@ -86,6 +93,8 @@ public class UIManager : MonoBehaviour
 	{
 		FFLogger.Log( "Level Loaded" );
 		levelText.textRenderer.text = "Level " + currentLevel.currentLevel;
+
+		uiItemUnlocked.transform.DOScale( Vector3.zero, 0.5f );
 
 		var sequence = DOTween.Sequence();
 		sequence.Append( backgroundRenderer.DOFade( 0, 1f ) );

@@ -259,6 +259,7 @@ MonoBehaviour:
   levelFailResponse:
     gameEvent: {fileID: 11400000, guid: 34530d3ffcb101340947c1849995f32a, type: 2}
   levelRevealed: {fileID: 11400000, guid: 3360f514c993a2e4794cfe8aaae3674e, type: 2}
+  loadNewLevel: {fileID: 11400000, guid: be297ad8f3671154d9e5732e824ceb21, type: 2}
   backgroundRenderer: {fileID: 1459411420}
   levelText: {fileID: 2021078843}
   uiLevelProgression: {fileID: 1579678335}
