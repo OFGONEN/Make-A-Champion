@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a385bd3b4416492409284c9a366cb52a, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  maxLevelCount: 0
+  maxLevelCount: 2
   uiEntityScaleTweenDuration: 0.5
   uiEntityMoveTweenDuration: 0.7
   uiFloatingEntityMoveTweenDuration: 0.5
@@ -24,4 +24,3 @@ MonoBehaviour:
   bubbleDestroyTweenDuration: 1
   packingItemSearchDistance: 3
   packingWeightSearchDistance: 1.5
-  particleContributionToLiquidPercentage: 0.5

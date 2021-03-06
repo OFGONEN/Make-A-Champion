@@ -15,6 +15,8 @@ public class EventAnimatorController : MonoBehaviour
 	[Header( "Fired Events" )]
 	public GameEvent levelFinished;
 
+	public GameObject[] unlockableItems;
+
 	private Animator animator;
 	private bool levelComplete;
 	#endregion
@@ -37,6 +39,10 @@ public class EventAnimatorController : MonoBehaviour
 	#endregion
 
 	#region API
+	public void ActivateItem( int index )
+	{
+		unlockableItems[ index ].SetActive( true );
+	}
 	#endregion
 
 	#region Implementation

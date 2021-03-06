@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/App.unity
     guid: b5fece92065ba9843acb5f4327d9b79f
   - enabled: 1
-    path: Assets/Scenes/UI_Selection.unity
+    path: Assets/Scenes/UI_Selection_Sport.unity
     guid: 236097986afd9ef41a9d95e2126ed3aa
+  - enabled: 1
+    path: Assets/Scenes/UI_Selection_Activity.unity
+    guid: 3f8ec87b455c81141bcb71a50b4d4e05
   m_configObjects: {}
