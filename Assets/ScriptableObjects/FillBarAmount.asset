@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e05ee9fc8555f24ab4b490f77b342aa, type: 3}
   m_Name: FillBarAmount
   m_EditorClassIdentifier: 
+  cleanUpListener:
+    gameEvent: {fileID: 11400000, guid: 782fb26b6a6533541beddcd134d6f541, type: 2}
   changeEvent: {fileID: 11400000, guid: 2c3e50c1fc163f7498b9a7342867864d, type: 2}
   changeDuration: 0.5
   changeEase: 1

@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: LevelData_1
   m_EditorClassIdentifier: 
   sceneIndex: 1
+  cameraStartPosition: {x: 9.938158, y: 5.0871763, z: 4.295953}
+  cameraStartRotation: {x: 18.050737, y: 200.88692, z: 0.08282941}
+  cameraEndPosition: {x: 7.2209315, y: 3.7873876, z: -1.1464466}
+  cameraEndRotation: {x: 27.160664, y: 213.96513, z: 0.08854018}
   selectionObjects:
   - selectionObject: {fileID: 919132149155446097, guid: 0bfbbd5f5e8dfaf43bd9793bbb87985c, type: 3}
     position: {x: -0.47, y: 0.1, z: 0}

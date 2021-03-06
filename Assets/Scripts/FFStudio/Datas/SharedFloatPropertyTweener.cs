@@ -8,7 +8,12 @@ namespace FFStudio
 	public class SharedFloatPropertyTweener : ScriptableObject
 	{
 		#region Fields
+		[Header( "Event Listeners" )]
+		public EventListenerDelegateResponse cleanUpListener;
+
+		[Header( "Fired Events" )]
 		public FloatGameEvent changeEvent;
+
 		public float changeDuration;
 		public Ease changeEase;
 
@@ -36,6 +41,19 @@ namespace FFStudio
 				}
 			}
 		}
+
+		#region UnityAPI
+		private void OnEnable()
+		{
+			cleanUpListener.OnEnable();
+			cleanUpListener.response = () => Value = 0;
+		}
+
+		private void OnDisable()
+		{
+			cleanUpListener.OnDisable();
+		}
+		#endregion
 
 		#region API
 		public void KillTween()

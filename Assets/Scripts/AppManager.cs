@@ -15,6 +15,7 @@ public class AppManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public GameEvent levelLoaded;
+	public GameEvent cleanUpEvent;
 
 	public CurrentLevelData currentLevel;
 	#endregion
@@ -49,9 +50,12 @@ public class AppManager : MonoBehaviour
 	{
 		var operation = SceneManager.UnloadSceneAsync( currentLevel.levelData.sceneIndex ); // Unload current scene
 
+		cleanUpEvent.Raise();
+
 		// When unloading done load the same scene again
 		operation.completed += ( AsyncOperation operation ) =>
 		SceneManager.LoadScene( currentLevel.levelData.sceneIndex, LoadSceneMode.Additive );
+
 	}
 	#endregion
 
@@ -68,8 +72,9 @@ public class AppManager : MonoBehaviour
 	private void LoadLevel()
 	{
 		currentLevel.currentLevel = PlayerPrefs.GetInt( "Level", 1 );
-
 		currentLevel.LoadCurrentLevelData();
+
+		cleanUpEvent.Raise();
 		SceneManager.LoadScene( currentLevel.levelData.sceneIndex, LoadSceneMode.Additive );
 
 		levelLoaded.Raise();

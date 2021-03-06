@@ -20,8 +20,11 @@ public class UIManager : MonoBehaviour
 	[Header( "UI Elements" )]
 	public Image backgroundRenderer;
 	public UIText levelText;
+	public UIFillingBar uiLevelProgression;
 	public Button uiLevelCompleted;
 	public Button uiItemUnlocked;
+
+
 	public CurrentLevelData currentLevel;
 
 	#endregion
@@ -54,7 +57,7 @@ public class UIManager : MonoBehaviour
 		uiLevelCompleted.gameObject.SetActive( false );
 
 		FFLogger.Log( "Load New Level" );
-		// Load new level
+		//TODO: Load new level 
 	}
 	public void LevelCompleteContinue()
 	{
@@ -88,6 +91,7 @@ public class UIManager : MonoBehaviour
 		sequence.Append( backgroundRenderer.DOFade( 0, 1f ) );
 		sequence.AppendCallback( levelRevealed.Raise );
 		sequence.Append( levelText.GoTargetPosition() );
+		sequence.Join( uiLevelProgression.GoTargetPosition() );
 	}
 	#endregion
 }
