@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/UI_Selection_Activity.unity
     guid: 3f8ec87b455c81141bcb71a50b4d4e05
+  - enabled: 1
+    path: Assets/Scenes/Weight_Loop.unity
+    guid: 3adf6bfa49dc90544be6f57f01f4f46f
   m_configObjects: {}

@@ -11,12 +11,13 @@ public class UIManager : MonoBehaviour
 	#region Fields
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelLoadedListener;
-	public EventListenerDelegateResponse levelCompletedResponse;
-	public EventListenerDelegateResponse levelFailResponse;
+	public EventListenerDelegateResponse levelCompletedListener;
+	public EventListenerDelegateResponse levelFailListener;
 
 	[Header( "Fired Events" )]
 	public GameEvent levelRevealed;
 	public GameEvent loadNewLevel;
+	public GameEvent resetLevel;
 
 	[Header( "UI Elements" )]
 	public Image backgroundRenderer;
@@ -24,6 +25,7 @@ public class UIManager : MonoBehaviour
 	public UIFillingBar uiLevelProgression;
 	public Button uiLevelCompleted;
 	public Button uiItemUnlocked;
+	public Button uiLevelFailed;
 
 
 	public CurrentLevelData currentLevel;
@@ -34,18 +36,21 @@ public class UIManager : MonoBehaviour
 	private void OnEnable()
 	{
 		levelLoadedListener.OnEnable();
-		levelCompletedResponse.OnEnable();
+		levelCompletedListener.OnEnable();
+		levelFailListener.OnEnable();
 	}
 	private void OnDisable()
 	{
 		levelLoadedListener.OnDisable();
-		levelCompletedResponse.OnDisable();
+		levelCompletedListener.OnDisable();
+		levelFailListener.OnDisable();
 	}
 
 	private void Awake()
 	{
 		levelLoadedListener.response = LevelLoadedResponse;
-		levelCompletedResponse.response = LevelCompleteResponse;
+		levelCompletedListener.response = LevelCompleteResponse;
+		levelFailListener.response = LevelFailedResponse;
 	}
 
 	#endregion
@@ -56,11 +61,10 @@ public class UIManager : MonoBehaviour
 		uiItemUnlocked.interactable = false;
 		uiLevelCompleted.gameObject.SetActive( false );
 
-
-
 		FFLogger.Log( "Load New Level" );
 		loadNewLevel.Raise();
 	}
+
 	public void LevelCompleteContinue()
 	{
 		FFLogger.Log( "Level Continue" );
@@ -69,6 +73,16 @@ public class UIManager : MonoBehaviour
 		uiItemUnlocked.interactable = true;
 
 		uiItemUnlocked.transform.DOScale( Vector3.one, 0.5f );
+	}
+
+	public void LevelFailedContinue()
+	{
+		FFLogger.Log( "Level Failed Continue" );
+
+		uiLevelFailed.interactable = false;
+
+		levelLoadedListener.response += () => uiLevelFailed.transform.DOScale( Vector3.zero, 0.1f );
+		resetLevel.Raise();
 	}
 	#endregion
 
@@ -79,7 +93,6 @@ public class UIManager : MonoBehaviour
 		sequence.Append( levelText.GoStartPosition() );
 		sequence.Join( uiLevelProgression.GoStartPosition() );
 
-
 		uiLevelCompleted.gameObject.SetActive( true );
 		uiItemUnlocked.gameObject.SetActive( true );
 
@@ -89,11 +102,14 @@ public class UIManager : MonoBehaviour
 		uiLevelCompleted.interactable = true;
 		uiLevelCompleted.transform.DOScale( Vector3.one, 0.5f );
 	}
+
 	void LevelLoadedResponse()
 	{
 		FFLogger.Log( "Level Loaded" );
-		levelText.textRenderer.text = "Level " + currentLevel.currentLevel;
 
+		levelLoadedListener.response = LevelLoadedResponse;
+
+		levelText.textRenderer.text = "Level " + currentLevel.currentLevel;
 		uiItemUnlocked.transform.DOScale( Vector3.zero, 0.5f );
 
 		var sequence = DOTween.Sequence();
@@ -101,6 +117,15 @@ public class UIManager : MonoBehaviour
 		sequence.AppendCallback( levelRevealed.Raise );
 		sequence.Append( levelText.GoTargetPosition() );
 		sequence.Join( uiLevelProgression.GoTargetPosition() );
+	}
+
+	void LevelFailedResponse()
+	{
+		uiLevelFailed.gameObject.SetActive( true );
+		uiLevelFailed.interactable = true;
+
+		uiLevelFailed.transform.localScale = Vector3.zero;
+		uiLevelFailed.transform.DOScale( Vector3.one, 0.5f );
 	}
 	#endregion
 }

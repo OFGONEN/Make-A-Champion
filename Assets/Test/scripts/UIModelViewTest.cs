@@ -13,8 +13,7 @@ public class UIModelViewTest : MonoBehaviour
 			viewers[ i ].CreateModels( i );
 		}
 
-		var _levelData = currentLevelData.levelData as UISelectionLevelData;
-		viewers[ 3 ].CreateModels( _levelData.unlockedObject );
-
+		var levelData = currentLevelData.levelData as UISelectionLevelData;
+		viewers[ 3 ].CreateModels( levelData.unlockedObject );
 	}
 }

@@ -9,6 +9,7 @@ namespace FFStudio
 		#region Fields
 		[Header( "Event Listeners" )]
 		public EventListenerDelegateResponse fillingAmountChangeListener;
+		public EventListenerDelegateResponse fillingBarColorChangeListener;
 		[Header( "UI Elements" )]
 		public Image uiFillingImage;
 		#endregion
@@ -16,17 +17,25 @@ namespace FFStudio
 		#region Unity API
 		private void OnEnable()
 		{
+			FFLogger.Log( "Filling Bar", gameObject );
 			fillingAmountChangeListener.OnEnable();
+			fillingBarColorChangeListener.OnEnable();
 		}
-		protected override void Awake()
-		{
-			base.Awake();
-			fillingAmountChangeListener.response = FillingAmountChange;
-			uiFillingImage.fillAmount = 0;
-		}
+
 		private void OnDisable()
 		{
 			fillingAmountChangeListener.OnDisable();
+			fillingBarColorChangeListener.OnDisable();
+		}
+
+		protected override void Awake()
+		{
+			base.Awake();
+
+			fillingAmountChangeListener.response = FillingAmountChange;
+			fillingBarColorChangeListener.response = FillingBarColorChange;
+
+			uiFillingImage.fillAmount = 0;
 		}
 		#endregion
 
@@ -38,6 +47,11 @@ namespace FFStudio
 		{
 			var _changeEvent = ( fillingAmountChangeListener.gameEvent as FloatGameEvent );
 			uiFillingImage.fillAmount = _changeEvent.eventValue;
+		}
+		void FillingBarColorChange()
+		{
+			var changeEvent = ( fillingBarColorChangeListener.gameEvent as ColorGameEvent );
+			uiFillingImage.color = changeEvent.eventValue;
 		}
 		#endregion
 	}

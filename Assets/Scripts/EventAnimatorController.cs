@@ -11,11 +11,14 @@ public class EventAnimatorController : MonoBehaviour
 	#region Fields
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse uiChooseListener;
+	public EventListenerDelegateResponse triggerEventListener;
+
 
 	[Header( "Fired Events" )]
 	public GameEvent levelFinished;
 
 	public GameObject[] unlockableItems;
+	public SharedBool animationHardVariable;
 
 	private Animator animator;
 	private bool levelComplete;
@@ -25,16 +28,19 @@ public class EventAnimatorController : MonoBehaviour
 	private void OnEnable()
 	{
 		uiChooseListener.OnEnable();
+		triggerEventListener.OnEnable();
 	}
 	private void OnDisable()
 	{
 		uiChooseListener.OnDisable();
+		triggerEventListener.OnDisable();
 	}
 	private void Awake()
 	{
 		animator = GetComponent<Animator>();
 
 		uiChooseListener.response = UIChooseResponse;
+		triggerEventListener.response = TriggerEventResponse;
 	}
 	#endregion
 
@@ -50,6 +56,14 @@ public class EventAnimatorController : MonoBehaviour
 	{
 		var changeEvent = uiChooseListener.gameEvent as IntGameEvent;
 		animator.SetInteger( "Selection", changeEvent.eventValue );
+	}
+
+	void TriggerEventResponse()
+	{
+		animator.SetBool( "Hard", animationHardVariable.sharedValue );
+
+		var changeEvent = triggerEventListener.gameEvent as StringGameEvent;
+		animator.SetTrigger( changeEvent.eventValue );
 	}
 	void SelectionFinished()
 	{

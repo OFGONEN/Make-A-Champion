@@ -7,13 +7,5 @@ namespace FFStudio
 	public class UISelectionLevelData : LevelData
 	{
 		public SelectionObjectData[] selectionObjects;
-		public SelectionObjectData unlockedObject;
-		[Serializable]
-		public struct SelectionObjectData
-		{
-			public GameObject selectionObject;
-			public Vector3 position;
-			public Vector3 scale;
-		}
 	}
 }

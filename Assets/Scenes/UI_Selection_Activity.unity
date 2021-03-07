@@ -287,10 +287,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiChooseListener:
     gameEvent: {fileID: 11400000, guid: 42e37d8c8affae54b875496305ab6ff4, type: 2}
+  triggerEventListener:
+    gameEvent: {fileID: 11400000, guid: df0b752cd3c857c41b784838a853943e, type: 2}
   levelFinished: {fileID: 11400000, guid: db5696571b5c3b24dac557451488a495, type: 2}
   unlockableItems:
   - {fileID: 101096328}
   - {fileID: 101096327}
+  animationHardVariable: {fileID: 11400000, guid: 127ace9ffd8aca24ab332c922bf55616, type: 2}
 --- !u!1 &101096327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1354777312386009210, guid: f2d192e8cfa2b47439c9c80da515cba8, type: 3}
@@ -1657,10 +1660,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 590497352}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2119faabb4bf3944b9cc25fda034827f, type: 3}
+  m_Script: {fileID: 11500000, guid: eea17d97e73e6434084f1dd18c6b872a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevelData: {fileID: 11400000, guid: e89b5352baeeecf4a926c547cd77a44c, type: 2}
+  defaultViewSpace: 0
   viewers:
   - {fileID: 590497355}
   - {fileID: 590497354}

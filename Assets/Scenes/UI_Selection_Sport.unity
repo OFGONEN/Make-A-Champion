@@ -235,7 +235,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiChooseListener:
     gameEvent: {fileID: 11400000, guid: 42e37d8c8affae54b875496305ab6ff4, type: 2}
+  triggerEventListener:
+    gameEvent: {fileID: 11400000, guid: df0b752cd3c857c41b784838a853943e, type: 2}
   levelFinished: {fileID: 11400000, guid: db5696571b5c3b24dac557451488a495, type: 2}
+  unlockableItems: []
+  animationHardVariable: {fileID: 11400000, guid: 127ace9ffd8aca24ab332c922bf55616, type: 2}
 --- !u!1001 &130781997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1583,24 +1587,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &590497356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590497352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2119faabb4bf3944b9cc25fda034827f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevelData: {fileID: 11400000, guid: e89b5352baeeecf4a926c547cd77a44c, type: 2}
-  viewers:
-  - {fileID: 590497355}
-  - {fileID: 590497354}
-  - {fileID: 590497353}
-  - {fileID: 590497357}
 --- !u!114 &590497357 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 700340027466858075, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
@@ -1612,6 +1598,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &590497358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 590497352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea17d97e73e6434084f1dd18c6b872a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentLevelData: {fileID: 11400000, guid: e89b5352baeeecf4a926c547cd77a44c, type: 2}
+  defaultViewSpace: 0
+  viewers:
+  - {fileID: 590497355}
+  - {fileID: 590497354}
+  - {fileID: 590497353}
+  - {fileID: 590497357}
 --- !u!1001 &656806214
 PrefabInstance:
   m_ObjectHideFlags: 0
