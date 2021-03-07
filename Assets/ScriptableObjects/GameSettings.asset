@@ -25,3 +25,4 @@ MonoBehaviour:
   packingItemSearchDistance: 3
   packingWeightSearchDistance: 1.5
   weightLoopFailTime: 3
+  weightLoopComplete: 3

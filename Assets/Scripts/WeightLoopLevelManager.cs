@@ -14,6 +14,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 	[Header( "Fired Events" )]
 	public StringGameEvent animationTriggerEvent;
+	public GameEvent levelCompleteEvent;
 	public GameEvent levelFailedEvent;
 
 	[Header( "UI Elements" )]
@@ -81,10 +82,19 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		FFLogger.Log( "Prepare Go Down" );
 
-		if( loopCount >= 3 )
+		loopCount++;
+
+		if( loopCount >= currentLevel.gameSettings.weightLoopComplete )
 		{
 			// level complete
 			FFLogger.Log( "Level Complete" );
+
+			uiPingPongMeter.GoStartPosition();
+			pingPongFloat.EndPingPong();
+
+			levelCompleteEvent.Raise();
+			tapInputListener.response = ExtensionMethods.EmptyMethod;
+
 			return;
 		}
 

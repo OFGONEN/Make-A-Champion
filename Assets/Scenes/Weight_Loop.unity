@@ -11005,6 +11005,7 @@ MonoBehaviour:
   levelRevealedListener:
     gameEvent: {fileID: 11400000, guid: 3360f514c993a2e4794cfe8aaae3674e, type: 2}
   animationTriggerEvent: {fileID: 11400000, guid: df0b752cd3c857c41b784838a853943e, type: 2}
+  levelCompleteEvent: {fileID: 11400000, guid: db5696571b5c3b24dac557451488a495, type: 2}
   levelFailedEvent: {fileID: 11400000, guid: 34530d3ffcb101340947c1849995f32a, type: 2}
   uiPingPongMeter: {fileID: 2118447751}
   uiFillingBar: {fileID: 291892702}
