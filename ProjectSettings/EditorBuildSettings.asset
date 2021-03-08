@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Weight_Loop.unity
     guid: 3adf6bfa49dc90544be6f57f01f4f46f
+  - enabled: 1
+    path: Assets/Scenes/Pack_Bag.unity
+    guid: 570babcf4aacc5243a5269f518c46822
   m_configObjects: {}

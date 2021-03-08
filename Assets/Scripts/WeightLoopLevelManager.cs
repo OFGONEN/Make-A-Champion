@@ -23,6 +23,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 	[Header( "Shared Variables" )]
 	public SharedBool animationHardVariable;
+	public SharedFloatPropertyTweener levelProgress;
 	public SharedColorProperty uiFailbarColor;
 	public SharedFloatPropertyPingPong pingPongFloat;
 	public SharedFloatPropertyFallBackTweener fallBackFloat;
@@ -30,6 +31,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public CurrentLevelData currentLevel;
 
 
+	private Camera mainCamera;
 	private Tween failTween;
 	private float failTime;
 	private int loopCount;
@@ -56,13 +58,11 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 	private void Start()
 	{
-		var mainCamera = Camera.main;
+		mainCamera = Camera.main;
 
 		mainCamera.transform.position = currentLevel.levelData.cameraStartPosition;
-		mainCamera.transform.rotation = Quaternion.Euler( currentLevel.levelData.cameraEndRotation );
+		mainCamera.transform.rotation = Quaternion.Euler( currentLevel.levelData.cameraStartRotation );
 
-		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, 0.5f );
-		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, 0.5f );
 	}
 	#endregion
 
@@ -83,6 +83,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 		FFLogger.Log( "Prepare Go Down" );
 
 		loopCount++;
+
+		levelProgress.Value = loopCount / ( float )currentLevel.gameSettings.weightLoopComplete;
 
 		if( loopCount >= currentLevel.gameSettings.weightLoopComplete )
 		{
@@ -105,6 +107,9 @@ public class WeightLoopLevelManager : MonoBehaviour
 	#region Implementation
 	void LevelRevealedResponse()
 	{
+		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, 0.5f );
+		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, 0.5f );
+
 		uiPingPongMeter.GoTargetPosition().OnComplete( () =>
 		{
 			tapInputListener.response = GoDown;

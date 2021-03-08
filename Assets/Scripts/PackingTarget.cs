@@ -4,11 +4,14 @@ using NaughtyAttributes;
 
 public class PackingTarget : MonoBehaviour
 {
-	#region Name
+	#region Fields
+	[Header( "Shared Variables" )]
 	public SharedReferance targetReferance;
 	public PackingTargetSet targetSet;
-	public MeshRenderer mesh;
 
+
+	// Private Fields
+	private MeshRenderer meshRenderer;
 	private MaterialPropertyBlock block;
 	private int colorID;
 	private Color baseColor;
@@ -25,10 +28,10 @@ public class PackingTarget : MonoBehaviour
 	}
 	private void Awake()
 	{
+		meshRenderer = GetComponent<MeshRenderer>();
 		block = new MaterialPropertyBlock();
 		colorID = Shader.PropertyToID( "_Color" );
-		baseColor = mesh.material.color;
-
+		baseColor = meshRenderer.material.color;
 
 		targetReferance.sharedValue = this;
 	}
@@ -38,13 +41,13 @@ public class PackingTarget : MonoBehaviour
 	public void Select( Color color )
 	{
 		block.SetColor( colorID, color );
-		mesh.SetPropertyBlock( block );
+		meshRenderer.SetPropertyBlock( block );
 	}
 	[Button]
 	public void DeSelect()
 	{
 		block.SetColor( colorID, baseColor );
-		mesh.SetPropertyBlock( block );
+		meshRenderer.SetPropertyBlock( block );
 	}
 
 	#endregion

@@ -1637,74 +1637,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
---- !u!1 &590497352 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6891171117354145430, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
-  m_PrefabInstance: {fileID: 590497351}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &590497353 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 584653061945316821, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
-  m_PrefabInstance: {fileID: 590497351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &590497354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3583732074258310456, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
-  m_PrefabInstance: {fileID: 590497351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &590497355 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8643384855761315340, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
-  m_PrefabInstance: {fileID: 590497351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &590497357 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 700340027466858075, guid: 8b03ec286c16cb248a5cdcc899bc033c, type: 3}
-  m_PrefabInstance: {fileID: 590497351}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5234a0d78943f6f418483c1a816002d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &590497358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590497352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea17d97e73e6434084f1dd18c6b872a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentLevelData: {fileID: 11400000, guid: e89b5352baeeecf4a926c547cd77a44c, type: 2}
-  defaultViewSpace: 1
-  viewers:
-  - {fileID: 590497355}
-  - {fileID: 590497354}
-  - {fileID: 590497353}
-  - {fileID: 590497357}
 --- !u!1001 &656806214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11010,6 +10942,7 @@ MonoBehaviour:
   uiPingPongMeter: {fileID: 2118447751}
   uiFillingBar: {fileID: 291892702}
   animationHardVariable: {fileID: 11400000, guid: 127ace9ffd8aca24ab332c922bf55616, type: 2}
+  levelProgress: {fileID: 11400000, guid: 5490513bcbe24eb49925da717311493e, type: 2}
   uiFailbarColor: {fileID: 11400000, guid: 4e76066a8488ebc4eb2764357e0ebc4b, type: 2}
   pingPongFloat: {fileID: 11400000, guid: 2382d5787fa0ed74a945edd04c9ec9f2, type: 2}
   fallBackFloat: {fileID: 11400000, guid: 2b4b274b7d89a4d4593d5b4686a211fb, type: 2}
