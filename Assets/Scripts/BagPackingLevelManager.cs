@@ -75,8 +75,8 @@ public class BagPackingLevelManager : MonoBehaviour
 
 	void LevelRevealedResponse()
 	{
-		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, 0.5f );
-		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, 0.5f );
+		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, currentLevel.gameSettings.cameraTravelDuration );
+		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, currentLevel.gameSettings.cameraTravelDuration );
 	}
 	#endregion
 }

@@ -53,8 +53,8 @@ public class UISelectionLevelManager : MonoBehaviour
 		// Move Camera
 		FFLogger.Log( "Camera Move Position" );
 
-		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, 0.5f );
-		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, 0.5f );
+		mainCamera.transform.DOMove( currentLevel.levelData.cameraEndPosition, currentLevel.gameSettings.cameraTravelDuration );
+		mainCamera.transform.DORotate( currentLevel.levelData.cameraEndRotation, currentLevel.gameSettings.cameraTravelDuration );
 	}
 
 	void SelectionCompleteResponse()

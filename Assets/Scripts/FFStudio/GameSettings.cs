@@ -22,6 +22,8 @@ namespace FFStudio
         public Vector2 bubbleSpreadForceMultiplier = new Vector2( 3.0f, 3.0f );
 		[ Foldout( "Cleaning GFX System" ), Range( 0.1f, 3.0f ) ] public float bubbleDestroyTweenDuration = 1.0f;
 
+		public float cameraTravelDuration;
+
 		public float packingItemSearchDistance;
 		public float packingWeightSearchDistance;
 		public float weightLoopFailTime;
