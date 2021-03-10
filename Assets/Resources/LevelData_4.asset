@@ -17,7 +17,7 @@ MonoBehaviour:
     selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
     position: {x: -0.41, y: 0.44, z: 0}
     scale: {x: 7, y: 7, z: 7}
-  cameraStartPosition: {x: 10.356321, y: 11.333082, z: 4.6433735}
+  cameraStartPosition: {x: 6.084, y: 3.29, z: -7.83}
   cameraStartRotation: {x: 46.755886, y: 200.77325, z: 0.115099244}
-  cameraEndPosition: {x: 6.196787, y: 8.205294, z: 0.61206055}
-  cameraEndRotation: {x: 47.09965, y: 183.2418, z: 0.11583669}
+  cameraEndPosition: {x: 6.084, y: 3.29, z: -9.45}
+  cameraEndRotation: {x: 58.79, y: 180, z: 0}
