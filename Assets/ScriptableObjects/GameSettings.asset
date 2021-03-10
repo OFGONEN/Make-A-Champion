@@ -22,7 +22,7 @@ MonoBehaviour:
   dirtDepletionRate: 10
   bubbleSpreadForceMultiplier: {x: 3, y: 8}
   bubbleDestroyTweenDuration: 1
-  cameraTravelDuration: 1
+  cameraTravelDuration: 1.5
   packingItemSearchDistance: 3
   packingWeightSearchDistance: 1.5
   weightLoopFailTime: 3

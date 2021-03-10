@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: LevelData_2
   m_EditorClassIdentifier: 
   sceneIndex: 2
-  cameraStartPosition: {x: 9.938158, y: 5.0871763, z: 4.295953}
-  cameraStartRotation: {x: 18.050737, y: 200.88692, z: 0.08282941}
-  cameraEndPosition: {x: 7.2209315, y: 3.7873876, z: -1.1464466}
-  cameraEndRotation: {x: 27.160664, y: 213.96513, z: 0.08854018}
+  unlockedObject:
+    selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
+    position: {x: -0.41, y: 0.44, z: 0}
+    scale: {x: 7, y: 7, z: 7}
+  cameraStartPosition: {x: -4.671, y: 3.927, z: -9.67}
+  cameraStartRotation: {x: 19.080004, y: 7.2000046, z: 0.028999943}
+  cameraEndPosition: {x: 1.451, y: 4.433, z: -3.883}
+  cameraEndRotation: {x: 19.3, y: 73.40001, z: 0.0000027138358}
   selectionObjects:
   - selectionObject: {fileID: 919132149155446097, guid: 0bfbbd5f5e8dfaf43bd9793bbb87985c, type: 3}
     position: {x: -0.47, y: 0.1, z: 0}
@@ -25,9 +29,5 @@ MonoBehaviour:
     position: {x: -0.44, y: 0.43, z: 0}
     scale: {x: 8, y: 8, z: 8}
   - selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
-    position: {x: -0.41, y: 0.44, z: 0}
-    scale: {x: 7, y: 7, z: 7}
-  unlockedObject:
-    selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
     position: {x: -0.41, y: 0.44, z: 0}
     scale: {x: 7, y: 7, z: 7}
