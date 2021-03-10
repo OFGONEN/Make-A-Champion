@@ -38,6 +38,12 @@ public class PackableWeight : MonoBehaviour
 		startRotation = transform.rotation.eulerAngles;
 
 		onLateUpdate = ExtensionMethods.EmptyMethod;
+
+	}
+
+	private void Start()
+	{
+		WeightPackingLevelManager.weightCount++;
 	}
 
 	private void LateUpdate()

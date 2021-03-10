@@ -72,7 +72,7 @@ public class AppManager : MonoBehaviour
 	private void LoadLevel()
 	{
 		// currentLevel.currentLevel = PlayerPrefs.GetInt( "Level", 1 );
-		currentLevel.currentLevel = 4;
+		currentLevel.currentLevel = 5;
 		currentLevel.LoadCurrentLevelData();
 
 		cleanUpEvent.Raise();

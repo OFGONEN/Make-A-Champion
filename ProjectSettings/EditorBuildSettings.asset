@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Pack_Bag.unity
     guid: 570babcf4aacc5243a5269f518c46822
+  - enabled: 1
+    path: Assets/Scenes/Pack_Weights.unity
+    guid: 78405aa558af76f429477f94a162eb5b
   m_configObjects: {}
