@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerPrefUtility
   m_EditorClassIdentifier: 
   valueName: Level
-  intValue: 5
+  intValue: 6

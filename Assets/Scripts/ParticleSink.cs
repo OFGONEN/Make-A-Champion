@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
+using DG.Tweening;
 
 public class ParticleSink : MonoBehaviour
 {
@@ -13,13 +14,30 @@ public class ParticleSink : MonoBehaviour
 	[ Header( "Parameters" ) ]
 	[ Range( 0.01f, 1.0f ) ] public float particleContributionToLiquidPercentage = 0.5f;
 
+	//Private Fields
 	private new ParticleSystem particleSystem;
-#endregion
+	private BoxCollider selectionCollider;
+	private TweenCallback lateUpdate;
+	private Tween movementTween;
 
-#region Unity API
-    private void Start()
+	private Vector3 startPosition;
+	private Vector3 startRotation;
+
+	private float hoverValue;
+	#endregion
+
+	#region Unity API
+	private void Awake()
     {
 		particleSystem = GetComponent< ParticleSystem >();
+		selectionCollider = GetComponentInChildren<BoxCollider>();
+
+		lateUpdate = ExtensionMethods.EmptyMethod;
+
+		startPosition = transform.position;
+		startRotation = transform.rotation.eulerAngles;
+
+		hoverValue = startPosition.y;
 	}
 
     private void OnParticleTrigger()
@@ -29,11 +47,56 @@ public class ParticleSink : MonoBehaviour
 		int numberOfEnteringParticles = particleSystem.GetTriggerParticles( ParticleSystemTriggerEventType.Enter, particles );
 		liquidFillPercentage.Value += numberOfEnteringParticles * particleContributionToLiquidPercentage;
     }
-#endregion
 
-#region API
-#endregion
+	private void LateUpdate()
+	{
+		lateUpdate();
+	}
+	#endregion
 
-#region Implementation
-#endregion
+	#region API
+	public void OnSelect()
+	{
+		FFLogger.Log( name + " Selected!" );
+
+		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 0.75f, 0.25f );
+
+		particleSystem.Play();
+
+		lateUpdate += Hover;
+		// lateUpdate += SearchTarget;
+	}
+
+	public void OnDeselect()
+	{
+		FFLogger.Log( name + " Deselected!" );
+
+		selectionCollider.enabled = false;
+
+		particleSystem.Stop();
+		// particleSystem.
+
+		lateUpdate = ExtensionMethods.EmptyMethod;
+		movementTween.Kill();
+
+		hoverValue = startPosition.y;
+
+		transform.DOMove( startPosition, 0.5f ).OnComplete( () => selectionCollider.enabled = true );
+		transform.DORotate( startRotation, 0.5f );
+	}
+
+	#endregion
+
+	#region Implementation
+	void Hover()
+	{
+		var position = transform.position;
+		position.y = hoverValue;
+		position.z = startPosition.z;
+
+		transform.position = position;
+
+		//looktargetovertime
+	}
+	#endregion
 }
