@@ -58,9 +58,9 @@ public class PackableItem : MonoBehaviour
 	public void OnSelect()
 	{
 		FFLogger.Log( "Select:" + name );
-		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 1f, 0.25f );
+		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 0.5f, 0.25f );
 
-		transform.DORotate( targetPackingTarget.transform.rotation.eulerAngles, 0.5f );
+		transform.DORotate( targetPackingTarget.targetRotation, 0.5f );
 
 		lateUpdate += Hover;
 		lateUpdate += SearchTarget;
@@ -130,12 +130,10 @@ public class PackableItem : MonoBehaviour
 	}
 	void GoTarget()
 	{
-		transform.DOMove( targetPackingTarget.transform.position, 0.5f );
-		transform.DORotate( targetPackingTarget.transform.rotation.eulerAngles, 0.5f );
+		targetPackingTarget.gameObject.SetActive( false );
+		transform.DOMove( targetPackingTarget.transform.position, 0.5f ).OnComplete( itemPacked.Raise ); // Target aquired
+		transform.DORotate( targetPackingTarget.targetRotation, 0.5f );
 		selectionCollider.enabled = false;
-
-		// Target Aquired
-		itemPacked.Raise();
 	}
 	#endregion
 }

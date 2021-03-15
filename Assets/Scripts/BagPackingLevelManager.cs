@@ -62,6 +62,7 @@ public class BagPackingLevelManager : MonoBehaviour
 	#region Implementation
 	void ItemAquiredResponse()
 	{
+		FFLogger.Log( "Packable: " + packableItemCount + " did: " + packedItem );
 		packedItem++;
 
 		levelProgress.Value = packedItem / ( float )packableItemCount;

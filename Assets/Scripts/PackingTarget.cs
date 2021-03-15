@@ -9,6 +9,8 @@ public class PackingTarget : MonoBehaviour
 	public SharedReferance targetReferance;
 	public PackingTargetSet targetSet;
 
+	public Vector3 targetRotation;
+
 
 	// Private Fields
 	private MeshRenderer meshRenderer;
