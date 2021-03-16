@@ -5,12 +5,15 @@ public class ModelViewer : MonoBehaviour
 {
 	#region Fields
 	public CurrentLevelData currentLevelData;
+
+	private Transform child;
 	#endregion
 
 	#region UnityAPI
 	void Update()
 	{
-		transform.Rotate( currentLevelData.gameSettings.uiModelViewSpinAxis, currentLevelData.gameSettings.uiModelViewSpinSpeed * Time.deltaTime );
+		if( child != null )
+			child.Rotate( currentLevelData.gameSettings.uiModelViewSpinAxis, currentLevelData.gameSettings.uiModelViewSpinSpeed * Time.deltaTime );
 	}
 	#endregion
 
@@ -21,6 +24,8 @@ public class ModelViewer : MonoBehaviour
 		var _instance = GameObject.Instantiate( _selectionLevelData.selectionObjects[ modelIndex ].selectionObject, transform );
 		_instance.transform.localPosition = _selectionLevelData.selectionObjects[ modelIndex ].position;
 		_instance.transform.localScale = _selectionLevelData.selectionObjects[ modelIndex ].scale;
+
+		child = _instance.transform;
 	}
 
 	public void CreateModels( UISelectionLevelData.SelectionObjectData selectionObjectData )
@@ -29,6 +34,8 @@ public class ModelViewer : MonoBehaviour
 		var _instance = GameObject.Instantiate( selectionObjectData.selectionObject, transform );
 		_instance.transform.localPosition = selectionObjectData.position;
 		_instance.transform.localScale = selectionObjectData.scale;
+
+		child = _instance.transform;
 	}
 	#endregion
 }
