@@ -17,6 +17,10 @@ public class PackableItem : MonoBehaviour
 	[Header( "Fired Events" )]
 	public GameEvent itemPacked;
 
+
+	[Header( "Public Variables" )]
+	public float hoverHeight = 0.5f;
+
 	//Private Fields
 	BoxCollider selectionCollider;
 	PackingTarget targetPackingTarget;
@@ -58,7 +62,7 @@ public class PackableItem : MonoBehaviour
 	public void OnSelect()
 	{
 		FFLogger.Log( "Select:" + name );
-		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 0.5f, 0.25f );
+		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, hoverHeight, 0.25f );
 
 		transform.DORotate( targetPackingTarget.targetRotation, 0.5f );
 

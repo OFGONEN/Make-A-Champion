@@ -7,8 +7,7 @@ namespace FFStudio
 	public class SharedFloatProperty : ScriptableObject
 	{
 		public FloatGameEvent changeEvent;
-		[ ShowNonSerializedField ]
-		private float sharedValue;
+		[ ShowNonSerializedField ] private float sharedValue;
 		public float Value
 		{
 			get

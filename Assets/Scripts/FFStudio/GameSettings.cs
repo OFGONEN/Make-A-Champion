@@ -28,5 +28,6 @@ namespace FFStudio
 		public float packingWeightSearchDistance;
 		public float weightLoopFailTime;
 		public int weightLoopComplete;
+		public float shakerSpeed;
 	}
 }

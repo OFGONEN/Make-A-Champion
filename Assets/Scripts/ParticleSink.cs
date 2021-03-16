@@ -4,20 +4,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
 using DG.Tweening;
+using Lean.Touch;
 
 public class ParticleSink : MonoBehaviour
 {
-#region Fields
+	#region Fields
+	[Header( "Event Listeneres" )]
+	public EventListenerDelegateResponse enableSelectionListener;
+	public EventListenerDelegateResponse stopFillingListener;
+
 	[ Header( "Modified Shared Data" ) ]
 	public SharedFloatProperty liquidFillPercentage;
 
 	[ Header( "Parameters" ) ]
 	[ Range( 0.01f, 1.0f ) ] public float particleContributionToLiquidPercentage = 0.5f;
 
+	//Public Fields
+	public Vector3 hoverRotation;
+
+
 	//Private Fields
 	private new ParticleSystem particleSystem;
-	private BoxCollider selectionCollider;
+	private LeanSelectable leanSelectable;
 	private TweenCallback lateUpdate;
+	private TweenCallback onDeSelect;
 	private Tween movementTween;
 
 	private Vector3 startPosition;
@@ -27,10 +37,25 @@ public class ParticleSink : MonoBehaviour
 	#endregion
 
 	#region Unity API
+
+	private void OnEnable()
+	{
+		enableSelectionListener.OnEnable();
+		stopFillingListener.OnEnable();
+	}
+
+	private void OnDisable()
+	{
+		enableSelectionListener.OnDisable();
+		stopFillingListener.OnDisable();
+	}
+
 	private void Awake()
     {
 		particleSystem = GetComponent< ParticleSystem >();
-		selectionCollider = GetComponentInChildren<BoxCollider>();
+		leanSelectable = GetComponent<LeanSelectable>();
+
+		leanSelectable.enabled = false;
 
 		lateUpdate = ExtensionMethods.EmptyMethod;
 
@@ -38,6 +63,16 @@ public class ParticleSink : MonoBehaviour
 		startRotation = transform.rotation.eulerAngles;
 
 		hoverValue = startPosition.y;
+
+		enableSelectionListener.response = () =>
+		{
+			leanSelectable.enabled = true;
+			enableSelectionListener.response = ExtensionMethods.EmptyMethod;
+		};
+
+		stopFillingListener.response = StopFilling;
+
+		onDeSelect = ReturnToDefault;
 	}
 
     private void OnParticleTrigger()
@@ -61,28 +96,16 @@ public class ParticleSink : MonoBehaviour
 
 		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 0.75f, 0.25f );
 
+		transform.DORotate( hoverRotation, 0.5f );
+
 		particleSystem.Play();
 
 		lateUpdate += Hover;
-		// lateUpdate += SearchTarget;
 	}
 
 	public void OnDeselect()
 	{
-		FFLogger.Log( name + " Deselected!" );
-
-		selectionCollider.enabled = false;
-
-		particleSystem.Stop();
-		// particleSystem.
-
-		lateUpdate = ExtensionMethods.EmptyMethod;
-		movementTween.Kill();
-
-		hoverValue = startPosition.y;
-
-		transform.DOMove( startPosition, 0.5f ).OnComplete( () => selectionCollider.enabled = true );
-		transform.DORotate( startRotation, 0.5f );
+		onDeSelect();
 	}
 
 	#endregion
@@ -95,8 +118,41 @@ public class ParticleSink : MonoBehaviour
 		position.z = startPosition.z;
 
 		transform.position = position;
+	}
 
-		//looktargetovertime
+	void ReturnToDefault()
+	{
+		FFLogger.Log( name + " Deselected!" );
+
+		leanSelectable.enabled = false;
+
+		particleSystem.Stop();
+
+		lateUpdate = ExtensionMethods.EmptyMethod;
+		movementTween.Kill();
+
+		hoverValue = startPosition.y;
+
+		transform.DOMove( startPosition, 0.5f ).OnComplete( () => leanSelectable.enabled = true );
+		transform.DORotate( startRotation, 0.5f );
+
+	}
+
+	void StopFilling()
+	{
+		stopFillingListener.response = ExtensionMethods.EmptyMethod;
+		onDeSelect = ExtensionMethods.EmptyMethod;
+		leanSelectable.enabled = false;
+
+		particleSystem.Stop();
+
+		lateUpdate = ExtensionMethods.EmptyMethod;
+		movementTween.Kill();
+
+		hoverValue = startPosition.y;
+
+		transform.DOMove( startPosition, 0.5f );
+		transform.DORotate( startRotation, 0.5f );
 	}
 	#endregion
 }

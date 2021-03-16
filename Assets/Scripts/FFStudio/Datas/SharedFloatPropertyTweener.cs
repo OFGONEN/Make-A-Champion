@@ -17,7 +17,7 @@ namespace FFStudio
 		public float changeDuration;
 		public Ease changeEase;
 
-		private float sharedValue;
+		[ ShowNonSerializedField ] private float sharedValue;
 		private Tween valueChangeTween;
 		#endregion
 
