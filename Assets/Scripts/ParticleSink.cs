@@ -94,7 +94,8 @@ public class ParticleSink : MonoBehaviour
 	{
 		FFLogger.Log( name + " Selected!" );
 
-		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, 0.75f, 0.25f );
+
+		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, startPosition.y + 0.25f, 0.25f );
 
 		transform.DORotate( hoverRotation, 0.5f );
 
