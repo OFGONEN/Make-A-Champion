@@ -129,7 +129,6 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 
-		FFLogger.Log( "LiftSpeed: " + 0 );
 		animator.SetFloat( "LiftSpeed", 0 );
 
 		var _value = pingPongFloat.Value;
@@ -182,7 +181,6 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 	void GoUpPush()
 	{
-		FFLogger.Log( "Go Up Push" );
 		fallBackFloat.Value += 0.2f;
 
 		if( fallBackFloat.Value >= 1f )
