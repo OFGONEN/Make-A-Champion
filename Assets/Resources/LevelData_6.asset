@@ -19,5 +19,5 @@ MonoBehaviour:
     scale: {x: 7, y: 7, z: 7}
   cameraStartPosition: {x: -2.9640312, y: 3.0712762, z: -1.812861}
   cameraStartRotation: {x: 32.658558, y: 57.547207, z: -0.0000020282034}
-  cameraEndPosition: {x: 0.8682645, y: 1.233185, z: -1.8103131}
-  cameraEndRotation: {x: 26.6425, y: 0.10286914, z: -0.000067897156}
+  cameraEndPosition: {x: 6.613, y: 3.2, z: -0.56}
+  cameraEndRotation: {x: 20.562986, y: 0, z: 0}
