@@ -13,6 +13,7 @@ namespace FFStudio
 		public Image uiMeterImage;
 
 		private Vector2 meterMinMaxValues;
+		private float uiMeterPosY;
 		#endregion
 
 		#region Unity API
@@ -27,6 +28,8 @@ namespace FFStudio
 		protected override void Awake()
 		{
 			base.Awake();
+
+			uiMeterPosY = uiMeterImage.rectTransform.anchoredPosition.y;
 
 			meterMinMaxValues.y = uiTransform.sizeDelta.x / 2f - uiMeterImage.rectTransform.sizeDelta.x / 2f;
 			meterMinMaxValues.x = -meterMinMaxValues.y;
@@ -43,7 +46,10 @@ namespace FFStudio
 			var _position = _changeEvent.eventValue * meterMinMaxValues.y;
 			_position = Mathf.Clamp( _position, meterMinMaxValues.x, meterMinMaxValues.y );
 
-			uiMeterImage.rectTransform.anchoredPosition = _position * Vector2.right;
+			var meterPosition = _position * Vector2.right;
+			meterPosition.y = uiMeterPosY;
+
+			uiMeterImage.rectTransform.anchoredPosition = meterPosition;
 		}
 		#endregion
 	}

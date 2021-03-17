@@ -237,6 +237,8 @@ MonoBehaviour:
     gameEvent: {fileID: 11400000, guid: 42e37d8c8affae54b875496305ab6ff4, type: 2}
   triggerEventListener:
     gameEvent: {fileID: 11400000, guid: df0b752cd3c857c41b784838a853943e, type: 2}
+  loopTimeChangeListener:
+    gameEvent: {fileID: 11400000, guid: f77ea9a4b5c04424bbbb89a0e773a37b, type: 2}
   levelFinished: {fileID: 11400000, guid: db5696571b5c3b24dac557451488a495, type: 2}
   unlockableItems: []
   animationHardVariable: {fileID: 11400000, guid: 127ace9ffd8aca24ab332c922bf55616, type: 2}
@@ -781,10 +783,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4965740628368774457, guid: ab3144a30cfdeee4c80173ed4cd93ca9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 26811e97f9dc9134aaaa085fe7975375, type: 3}
     - target: {fileID: 4965740628705326937, guid: ab3144a30cfdeee4c80173ed4cd93ca9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4965740628861247698, guid: ab3144a30cfdeee4c80173ed4cd93ca9, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 26811e97f9dc9134aaaa085fe7975375, type: 3}
     - target: {fileID: 4965740629385599500, guid: ab3144a30cfdeee4c80173ed4cd93ca9, type: 3}
       propertyPath: m_Interactable
       value: 0

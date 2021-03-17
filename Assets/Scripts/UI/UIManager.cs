@@ -121,6 +121,9 @@ public class UIManager : MonoBehaviour
 
 	void LevelFailedResponse()
 	{
+		levelText.GoStartPosition();
+		uiLevelProgression.GoStartPosition();
+
 		uiLevelFailed.gameObject.SetActive( true );
 		uiLevelFailed.interactable = true;
 
