@@ -12,6 +12,7 @@ public class WeightPackingLevelManager : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelRevealedListener;
 	public EventListenerDelegateResponse weightPackedListener;
+	public EventListenerDelegateResponse weightLeftPackedListener;
 
 	[Header( "Fired Items" )]
 	public GameEvent levelComplete;
@@ -34,17 +35,20 @@ public class WeightPackingLevelManager : MonoBehaviour
 	{
 		levelRevealedListener.OnEnable();
 		weightPackedListener.OnEnable();
+		weightLeftPackedListener.OnEnable();
 	}
 	private void OnDisable()
 	{
 		levelRevealedListener.OnDisable();
 		weightPackedListener.OnDisable();
+		weightLeftPackedListener.OnDisable();
 	}
 
 	private void Awake()
 	{
 		levelRevealedListener.response = LevelRevealedResponse;
 		weightPackedListener.response = WeightPackedResponse;
+		weightLeftPackedListener.response = WeightPackedResponse;
 
 		weightCount = 0;
 

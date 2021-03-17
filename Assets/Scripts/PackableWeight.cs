@@ -90,7 +90,7 @@ public class PackableWeight : MonoBehaviour
 
 		var _position = transform.position;
 
-		_position.x = 0;
+		_position.x = startPosition.x;
 		transform.position = _position;
 	}
 
