@@ -28,6 +28,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public SharedFloatPropertyPingPong pingPongFloat;
 	public SharedFloatPropertyFallBackTweener fallBackFloat;
 
+	[Header( "Public Variables" )]
+	public Animator animator;
 	public CurrentLevelData currentLevel;
 
 
@@ -127,6 +129,9 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 
+		FFLogger.Log( "LiftSpeed: " + 0 );
+		animator.SetFloat( "LiftSpeed", 0 );
+
 		var _value = pingPongFloat.Value;
 		pingPongFloat.EndPingPong();
 
@@ -140,6 +145,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 			uiPingPongMeter.GoStartPosition();
 			uiFillingBar.GoTargetPosition();
+			fallBackFloat.Value = 0f;
 		}
 		else if( _value >= -0.75f && _value <= 0.75f )
 		{
@@ -151,6 +157,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 			uiPingPongMeter.GoStartPosition();
 			uiFillingBar.GoTargetPosition();
+			fallBackFloat.Value = 0f;
 		}
 		else
 			LevelFailed();
@@ -161,8 +168,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 		var defaultFailTime = currentLevel.gameSettings.weightLoopFailTime;
 		failTime = currentLevel.gameSettings.weightLoopFailTime;
 
-		animationTriggerEvent.eventValue = "Loop";
-		animationTriggerEvent.Raise();
+		// animationTriggerEvent.eventValue = "Loop";
+		// animationTriggerEvent.Raise();
 
 		failTween = DOTween.To( () => failTime, x => failTime = x, 0, failTime )
 		.OnComplete( LevelFailed )
@@ -175,6 +182,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 	void GoUpPush()
 	{
+		FFLogger.Log( "Go Up Push" );
 		fallBackFloat.Value += 0.2f;
 
 		if( fallBackFloat.Value >= 1f )
@@ -183,16 +191,18 @@ public class WeightLoopLevelManager : MonoBehaviour
 			fallBackFloat.CompleteTween();
 
 			//GoUp;
-			animationTriggerEvent.eventValue = "Up";
-			animationTriggerEvent.Raise();
+			// animationTriggerEvent.eventValue = "Up";
+			// animationTriggerEvent.Raise();
+
+			animator.SetFloat( "LiftSpeed", 1 );
 
 			tapInputListener.response = ExtensionMethods.EmptyMethod;
 
 			if( loopCount < 3 )
 			{
 				uiPingPongMeter.GoTargetPosition().OnComplete( pingPongFloat.StartPingPong );
-				uiFillingBar.GoStartPosition();
-				fallBackFloat.Value = 0;
+				uiFillingBar.GoStartPosition().OnComplete( PrepareGoDown );
+				// fallBackFloat.Value = 0;
 			}
 		}
 	}
@@ -202,6 +212,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 		FFLogger.Log( "Level Failed" );
 
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
+
+		animator.SetFloat( "LiftSpeed", 1 );
 
 		animationTriggerEvent.eventValue = "Fail";
 		animationTriggerEvent.Raise();

@@ -12,6 +12,7 @@ namespace FFStudio
 		public EventListenerDelegateResponse fillingBarColorChangeListener;
 		[Header( "UI Elements" )]
 		public Image uiFillingImage;
+		public bool canChangeColor;
 		#endregion
 
 		#region Unity API
@@ -33,7 +34,11 @@ namespace FFStudio
 			base.Awake();
 
 			fillingAmountChangeListener.response = FillingAmountChange;
-			fillingBarColorChangeListener.response = FillingBarColorChange;
+
+			if( canChangeColor )
+				fillingBarColorChangeListener.response = FillingBarColorChange;
+			else
+				fillingBarColorChangeListener.response = ExtensionMethods.EmptyMethod;
 
 			uiFillingImage.fillAmount = 0;
 		}

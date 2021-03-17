@@ -12,7 +12,7 @@ public class EventAnimatorController : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse uiChooseListener;
 	public EventListenerDelegateResponse triggerEventListener;
-
+	public EventListenerDelegateResponse loopTimeChangeListener;
 
 	[Header( "Fired Events" )]
 	public GameEvent levelFinished;
@@ -29,11 +29,13 @@ public class EventAnimatorController : MonoBehaviour
 	{
 		uiChooseListener.OnEnable();
 		triggerEventListener.OnEnable();
+		loopTimeChangeListener.OnEnable();
 	}
 	private void OnDisable()
 	{
 		uiChooseListener.OnDisable();
 		triggerEventListener.OnDisable();
+		loopTimeChangeListener.OnDisable();
 	}
 	private void Awake()
 	{
@@ -41,6 +43,7 @@ public class EventAnimatorController : MonoBehaviour
 
 		uiChooseListener.response = UIChooseResponse;
 		triggerEventListener.response = TriggerEventResponse;
+		loopTimeChangeListener.response = LoopTimeChangeResponse;
 	}
 	#endregion
 
@@ -65,6 +68,13 @@ public class EventAnimatorController : MonoBehaviour
 		var changeEvent = triggerEventListener.gameEvent as StringGameEvent;
 		animator.SetTrigger( changeEvent.eventValue );
 	}
+
+	void LoopTimeChangeResponse()
+	{
+		var changeEvent = loopTimeChangeListener.gameEvent as FloatGameEvent;
+		animator.SetFloat( "Lift", changeEvent.eventValue );
+	}
+
 	void SelectionFinished()
 	{
 		FFLogger.Log( "Level Finished" );
