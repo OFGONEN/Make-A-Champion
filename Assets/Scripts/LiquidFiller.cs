@@ -54,7 +54,7 @@ public class LiquidFiller : MonoBehaviour
 #region Implementation
 	private void OnLiquidFilled()
 	{
-		FFLogger.Log( name + ": liquidFillPercentage: " + liquidFillPercentage.Value + ", CurrentFillAmount: " + CurrentFillAmount );
+		// FFLogger.Log( name + ": liquidFillPercentage: " + liquidFillPercentage.Value + ", CurrentFillAmount: " + CurrentFillAmount );
 		meshRenderer.GetPropertyBlock( materialPropertyBlock );
 		materialPropertyBlock.SetFloat( fillAmountShaderID, CurrentFillAmount );
 		meshRenderer.SetPropertyBlock( materialPropertyBlock );

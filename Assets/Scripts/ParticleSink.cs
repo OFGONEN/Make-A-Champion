@@ -25,7 +25,7 @@ public class ParticleSink : MonoBehaviour
 
 	//Private Fields
 	private new ParticleSystem particleSystem;
-	private LeanSelectable leanSelectable;
+	private BoxCollider selectionCollider;
 	private TweenCallback lateUpdate;
 	private TweenCallback onDeSelect;
 	private Tween movementTween;
@@ -53,9 +53,9 @@ public class ParticleSink : MonoBehaviour
 	private void Awake()
     {
 		particleSystem = GetComponent< ParticleSystem >();
-		leanSelectable = GetComponent<LeanSelectable>();
+		selectionCollider = GetComponentInChildren< BoxCollider >();
 
-		leanSelectable.enabled = false;
+		selectionCollider.enabled = false;
 
 		lateUpdate = ExtensionMethods.EmptyMethod;
 
@@ -66,7 +66,7 @@ public class ParticleSink : MonoBehaviour
 
 		enableSelectionListener.response = () =>
 		{
-			leanSelectable.enabled = true;
+			selectionCollider.enabled = true;
 			enableSelectionListener.response = ExtensionMethods.EmptyMethod;
 		};
 
@@ -94,18 +94,19 @@ public class ParticleSink : MonoBehaviour
 	{
 		FFLogger.Log( name + " Selected!" );
 
-
 		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, startPosition.y + 0.25f, 0.25f );
 
 		transform.DORotate( hoverRotation, 0.5f );
 
 		particleSystem.Play();
 
-		lateUpdate += Hover;
+		lateUpdate = Hover;
 	}
 
 	public void OnDeselect()
 	{
+		FFLogger.Log( name + " Deselected!" );
+
 		onDeSelect();
 	}
 
@@ -123,9 +124,9 @@ public class ParticleSink : MonoBehaviour
 
 	void ReturnToDefault()
 	{
-		FFLogger.Log( name + " Deselected!" );
+		FFLogger.Log( name + " Return to default!" );
 
-		leanSelectable.enabled = false;
+		selectionCollider.enabled = false;
 
 		particleSystem.Stop();
 
@@ -134,22 +135,24 @@ public class ParticleSink : MonoBehaviour
 
 		hoverValue = startPosition.y;
 
-		transform.DOMove( startPosition, 0.5f ).OnComplete( () => leanSelectable.enabled = true );
+		transform.DOMove( startPosition, 0.5f ).OnComplete( () => selectionCollider.enabled = true );
 		transform.DORotate( startRotation, 0.5f );
 
 	}
 
 	void StopFilling()
 	{
+		FFLogger.Log( name + " stop filling!" );
+
+		movementTween.Kill();
+
 		stopFillingListener.response = ExtensionMethods.EmptyMethod;
 		onDeSelect = ExtensionMethods.EmptyMethod;
-		leanSelectable.enabled = false;
+		selectionCollider.enabled = false;
 
 		particleSystem.Stop();
 
 		lateUpdate = ExtensionMethods.EmptyMethod;
-		movementTween.Kill();
-
 		hoverValue = startPosition.y;
 
 		transform.DOMove( startPosition, 0.5f );

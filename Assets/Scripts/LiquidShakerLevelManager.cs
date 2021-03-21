@@ -82,14 +82,12 @@ public class LiquidShakerLevelManager : MonoBehaviour
 
 		if( levelProgress.Value >= 0.48f )
 		{
-			FFLogger.Log( "Stop Filling x2" );
 			closeBottleLid.Raise(); // change with can close bottle
 			bottleCapSelectionCollider.enabled = true;
 			stopFillingPowder.Raise();
 		}
 		else if( levelProgress.Value >= 0.25f )
 		{
-			FFLogger.Log( "Stop Filling" );
 			stopFillingWater.Raise();
 			enableSelectingPower.Raise();
 		}
