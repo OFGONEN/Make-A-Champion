@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ea3c0b9fd00fd441b6cebc5941ee13b, type: 3}
   m_Name: LevelData_5
   m_EditorClassIdentifier: 
-  sceneIndex: 5
+  sceneIndex: 4
   unlockedObject:
     selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
     position: {x: -0.41, y: 0.44, z: 0}
     scale: {x: 7, y: 7, z: 7}
-  cameraStartPosition: {x: -0.09, y: 4.22, z: -4.59}
-  cameraStartRotation: {x: 22.599997, y: 129.2, z: 0.00000092478774}
-  cameraEndPosition: {x: 1.99, y: 4.22, z: -1.77}
-  cameraEndRotation: {x: 22.599997, y: 90, z: 0}
+  cameraStartPosition: {x: 6.084, y: 3.29, z: -7.83}
+  cameraStartRotation: {x: 46.755886, y: 200.77325, z: 0.115099244}
+  cameraEndPosition: {x: 6.084, y: 3.29, z: -9.45}
+  cameraEndRotation: {x: 58.79, y: 180, z: 0}

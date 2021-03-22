@@ -9,15 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ea3c0b9fd00fd441b6cebc5941ee13b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d061da26f721d24a9def3f2749d8f75, type: 3}
   m_Name: LevelData_4
   m_EditorClassIdentifier: 
-  sceneIndex: 4
+  sceneIndex: 2
   unlockedObject:
     selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
     position: {x: -0.41, y: 0.44, z: 0}
     scale: {x: 7, y: 7, z: 7}
-  cameraStartPosition: {x: 6.084, y: 3.29, z: -7.83}
-  cameraStartRotation: {x: 46.755886, y: 200.77325, z: 0.115099244}
-  cameraEndPosition: {x: 6.084, y: 3.29, z: -9.45}
-  cameraEndRotation: {x: 58.79, y: 180, z: 0}
+  cameraStartPosition: {x: -4.671, y: 3.927, z: -9.67}
+  cameraStartRotation: {x: 19.080004, y: 7.2000046, z: 0.028999943}
+  cameraEndPosition: {x: 1.451, y: 4.433, z: -3.883}
+  cameraEndRotation: {x: 19.3, y: 73.40001, z: 0.0000027138358}
+  selectionObjects:
+  - selectionObject: {fileID: 919132149155446097, guid: 0bfbbd5f5e8dfaf43bd9793bbb87985c, type: 3}
+    position: {x: -0.47, y: 0.1, z: 0}
+    scale: {x: 3, y: 3, z: 3}
+  - selectionObject: {fileID: 919132149155446097, guid: c93bf22db058ef946bff5c74b18de2bc, type: 3}
+    position: {x: -0.44, y: 0.43, z: 0}
+    scale: {x: 8, y: 8, z: 8}
+  - selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
+    position: {x: -0.41, y: 0.44, z: 0}
+    scale: {x: 7, y: 7, z: 7}
