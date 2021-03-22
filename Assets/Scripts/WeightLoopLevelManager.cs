@@ -11,6 +11,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse tapInputListener;
 	public EventListenerDelegateResponse levelRevealedListener;
+	public EventListenerDelegateResponse idleStateEnteredListener;
 
 	private EventListenerDelegateResponse weightTimeChangeListener;
 
@@ -49,6 +50,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		tapInputListener.OnEnable();
 		levelRevealedListener.OnEnable();
+		idleStateEnteredListener.OnEnable();
 		weightTimeChangeListener.OnEnable();
 	}
 
@@ -56,6 +58,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		weightTimeChangeListener.OnDisable();
 		tapInputListener.OnDisable();
+		idleStateEnteredListener.OnDisable();
 		levelRevealedListener.OnDisable();
 	}
 
@@ -65,6 +68,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 		weightTimeChangeListener.gameEvent = weightTime.changeEvent;
 
 		levelRevealedListener.response = LevelRevealedResponse;
+		idleStateEnteredListener.response = ExtensionMethods.EmptyMethod;
 		weightTimeChangeListener.response = ExtensionMethods.EmptyMethod;
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 	}
@@ -95,6 +99,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public void PrepareGoDown()
 	{
 		FFLogger.Log( "Prepare Go Down" );
+
+		idleStateEnteredListener.response = ExtensionMethods.EmptyMethod;
 
 		loopCount++;
 
@@ -235,7 +241,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 			weightTimeChangeListener.response = ExtensionMethods.EmptyMethod;
 			weightTime.KillTween();
 
-			PrepareGoDown();
+			idleStateEnteredListener.response = PrepareGoDown;
+			// PrepareGoDown();
 		}
 	}
 	void GoUpPush()
