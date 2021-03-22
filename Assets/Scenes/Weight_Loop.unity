@@ -9033,7 +9033,7 @@ MonoBehaviour:
   triggerEventListener:
     gameEvent: {fileID: 11400000, guid: df0b752cd3c857c41b784838a853943e, type: 2}
   loopTimeChangeListener:
-    gameEvent: {fileID: 11400000, guid: f77ea9a4b5c04424bbbb89a0e773a37b, type: 2}
+    gameEvent: {fileID: 11400000, guid: 30390ed10263961489c5813614b7b109, type: 2}
   levelFinished: {fileID: 11400000, guid: db5696571b5c3b24dac557451488a495, type: 2}
   unlockableItems:
   - {fileID: 1197142844}
@@ -9093,6 +9093,7 @@ MonoBehaviour:
   levelProgress: {fileID: 11400000, guid: 5490513bcbe24eb49925da717311493e, type: 2}
   uiFailbarColor: {fileID: 11400000, guid: 4e76066a8488ebc4eb2764357e0ebc4b, type: 2}
   pingPongFloat: {fileID: 11400000, guid: 2382d5787fa0ed74a945edd04c9ec9f2, type: 2}
+  weightTime: {fileID: 11400000, guid: bca0a1f878808dc4194dbfd9a857fc87, type: 2}
   fallBackFloat: {fileID: 11400000, guid: 2b4b274b7d89a4d4593d5b4686a211fb, type: 2}
   animator: {fileID: 1197142845}
   currentLevel: {fileID: 11400000, guid: e89b5352baeeecf4a926c547cd77a44c, type: 2}

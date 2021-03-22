@@ -27,4 +27,4 @@ MonoBehaviour:
   packingWeightSearchDistance: 1.5
   weightLoopFailTime: 3
   weightLoopComplete: 3
-  shakerSpeed: 5
+  shakerSpeed: 2.5

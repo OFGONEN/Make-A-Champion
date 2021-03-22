@@ -3,6 +3,7 @@
 using FFStudio;
 using UnityEngine;
 using DG.Tweening;
+using NaughtyAttributes;
 
 public class WeightLoopLevelManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse tapInputListener;
 	public EventListenerDelegateResponse levelRevealedListener;
+
+	private EventListenerDelegateResponse weightTimeChangeListener;
 
 
 	[Header( "Fired Events" )]
@@ -26,6 +29,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public SharedFloatPropertyTweener levelProgress;
 	public SharedColorProperty uiFailbarColor;
 	public SharedFloatPropertyPingPong pingPongFloat;
+	public SharedFloatPropertyTweener weightTime;
 	public SharedFloatPropertyFallBackTweener fallBackFloat;
 
 	[Header( "Public Variables" )]
@@ -36,6 +40,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	private Camera mainCamera;
 	private Tween failTween;
 	private float failTime;
+	private float failCount;
 	private int loopCount;
 	#endregion
 
@@ -44,17 +49,23 @@ public class WeightLoopLevelManager : MonoBehaviour
 	{
 		tapInputListener.OnEnable();
 		levelRevealedListener.OnEnable();
+		weightTimeChangeListener.OnEnable();
 	}
 
 	private void OnDisable()
 	{
+		weightTimeChangeListener.OnDisable();
 		tapInputListener.OnDisable();
 		levelRevealedListener.OnDisable();
 	}
 
 	private void Awake()
 	{
+		weightTimeChangeListener = new EventListenerDelegateResponse();
+		weightTimeChangeListener.gameEvent = weightTime.changeEvent;
+
 		levelRevealedListener.response = LevelRevealedResponse;
+		weightTimeChangeListener.response = ExtensionMethods.EmptyMethod;
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
 	}
 
@@ -77,9 +88,10 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public void PrepareGoUp()
 	{
 		FFLogger.Log( "Prepare Go Up" );
-		tapInputListener.response = GoUpLoop;
+		tapInputListener.response = GoUpPushTapTiming;
 	}
 
+	[Button]
 	public void PrepareGoDown()
 	{
 		FFLogger.Log( "Prepare Go Down" );
@@ -98,11 +110,13 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 			levelCompleteEvent.Raise();
 			tapInputListener.response = ExtensionMethods.EmptyMethod;
+			weightTimeChangeListener.response = ExtensionMethods.EmptyMethod;
 
 			return;
 		}
 
 		tapInputListener.response = GoDown;
+		weightTimeChangeListener.response = WeightTimeChangeResponse;
 	}
 	#endregion
 
@@ -128,11 +142,12 @@ public class WeightLoopLevelManager : MonoBehaviour
 	void GoDown()
 	{
 		tapInputListener.response = ExtensionMethods.EmptyMethod;
+		weightTimeChangeListener.response = WeightTimeChangeResponse;
 
 		animator.SetFloat( "LiftSpeed", 0 );
 
 		var _value = pingPongFloat.Value;
-		pingPongFloat.EndPingPong();
+		// pingPongFloat.EndPingPong();
 
 		if( _value >= -0.5f && _value <= 0.5f )
 		{
@@ -142,9 +157,10 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 			animationTriggerEvent.Raise();
 
-			uiPingPongMeter.GoStartPosition();
-			uiFillingBar.GoTargetPosition();
+			// uiPingPongMeter.GoStartPosition();
+			// uiFillingBar.GoTargetPosition();
 			fallBackFloat.Value = 0f;
+			weightTime.Value = 0;
 		}
 		else if( _value >= -0.75f && _value <= 0.75f )
 		{
@@ -154,12 +170,15 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 			animationTriggerEvent.Raise();
 
-			uiPingPongMeter.GoStartPosition();
-			uiFillingBar.GoTargetPosition();
+			// uiPingPongMeter.GoStartPosition();
+			// uiFillingBar.GoTargetPosition();
 			fallBackFloat.Value = 0f;
+			weightTime.Value = 0;
 		}
 		else
 			LevelFailed();
+
+
 	}
 
 	void GoUpLoop()
@@ -179,6 +198,50 @@ public class WeightLoopLevelManager : MonoBehaviour
 		tapInputListener.response = GoUpPush;
 	}
 
+	void GoUpPushTapTiming()
+	{
+		FFLogger.Log( "Tap Timing" );
+
+		var _value = pingPongFloat.Value;
+
+		float addValue = 0;
+
+		if( _value >= -0.5f && _value <= 0.5f )
+		{
+			//Green
+			addValue = 0.3f;
+			weightTime.Value += addValue;
+		}
+		else if( _value >= -0.75f && _value <= 0.75f )
+		{
+			//Yellow
+			addValue = 0.2f;
+			weightTime.Value += addValue;
+		}
+		else
+		{
+			failCount++;
+			weightTime.Value -= 0.2f;
+
+			if( failCount >= 3 )
+				LevelFailed();
+		}
+
+	}
+
+	void WeightTimeChangeResponse()
+	{
+		if( weightTime.Value >= 1f )
+		{
+			FFLogger.Log( "Weight Time reached 1" );
+			animator.SetFloat( "LiftSpeed", 1 );
+			tapInputListener.response = ExtensionMethods.EmptyMethod;
+			weightTimeChangeListener.response = ExtensionMethods.EmptyMethod;
+			weightTime.KillTween();
+
+			PrepareGoDown();
+		}
+	}
 	void GoUpPush()
 	{
 		fallBackFloat.Value += 0.2f;
