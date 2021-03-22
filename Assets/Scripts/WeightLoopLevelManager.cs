@@ -204,24 +204,20 @@ public class WeightLoopLevelManager : MonoBehaviour
 
 		var _value = pingPongFloat.Value;
 
-		float addValue = 0;
-
 		if( _value >= -0.5f && _value <= 0.5f )
 		{
 			//Green
-			addValue = 0.3f;
-			weightTime.Value += addValue;
+			weightTime.Value += currentLevel.gameSettings.weightLoopGreenValue;
 		}
 		else if( _value >= -0.75f && _value <= 0.75f )
 		{
 			//Yellow
-			addValue = 0.2f;
-			weightTime.Value += addValue;
+			weightTime.Value += currentLevel.gameSettings.weightLoopYellowValue;
 		}
 		else
 		{
 			failCount++;
-			weightTime.Value -= 0.2f;
+			weightTime.Value -= currentLevel.gameSettings.weightLoopRedValue;
 
 			if( failCount >= 3 )
 				LevelFailed();

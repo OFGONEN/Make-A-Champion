@@ -26,8 +26,11 @@ namespace FFStudio
 
 		public float packingItemSearchDistance;
 		public float packingWeightSearchDistance;
-		public float weightLoopFailTime;
-		public int weightLoopComplete;
+		[Foldout( "Weight Loop" )] public float weightLoopFailTime;
+		[Foldout( "Weight Loop" )] public float weightLoopGreenValue = 0.3f;
+		[Foldout( "Weight Loop" )] public float weightLoopYellowValue = 0.2f;
+		[Foldout( "Weight Loop" )] public float weightLoopRedValue = 0.2f;
+		[Foldout( "Weight Loop" )] public int weightLoopComplete;
 		public float shakerSpeed;
 	}
 }
