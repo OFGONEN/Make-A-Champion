@@ -11,11 +11,17 @@ public class WeightTargets : MonoBehaviour
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse weightPackedListener;
 
+	[Header( "Fired Events" )]
+	public StringGameEvent animationTriggerEvent;
+	public GameEvent correctWeightPacked;
+
+
 	[Header( "Shared Variables" )]
 	public SharedReferance currentWeightTarget;
 
 	//Public Fields
 	public Transform[] weightTargets;
+	public GameObject initialTarget;
 
 	//Private Fields
 	private int weightTargetIndex;
@@ -47,7 +53,21 @@ public class WeightTargets : MonoBehaviour
 	#region Implementation
 	void WeightPackedResponse()
 	{
+		var changeEvet = weightPackedListener.gameEvent as IntGameEvent;
+
+		if( changeEvet.eventValue != weightTargetIndex )
+		{
+			animationTriggerEvent.eventValue = "Fail";
+			animationTriggerEvent.Raise();
+		}
+		else
+			correctWeightPacked.Raise();
+
+		weightTargets[ weightTargetIndex ].gameObject.SetActive( false ); // Close the silhouette
 		weightTargetIndex++;
+
+		if( weightTargetIndex == weightTargets.Length )
+			initialTarget.SetActive( false );
 
 		weightTargetIndex = Mathf.Clamp( weightTargetIndex, 0, weightTargets.Length - 1 );
 		currentWeightTarget.sharedValue = weightTargets[ weightTargetIndex ];

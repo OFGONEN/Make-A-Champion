@@ -11,8 +11,7 @@ public class WeightPackingLevelManager : MonoBehaviour
 	#region Fields
 	[Header( "Event Listeners" )]
 	public EventListenerDelegateResponse levelRevealedListener;
-	public EventListenerDelegateResponse weightPackedListener;
-	public EventListenerDelegateResponse weightLeftPackedListener;
+	public EventListenerDelegateResponse correctWeightPackedListener;
 
 	[Header( "Fired Items" )]
 	public GameEvent levelComplete;
@@ -23,7 +22,7 @@ public class WeightPackingLevelManager : MonoBehaviour
 
 
 	//Public Fields
-	public static int weightCount;
+	public int weightCount;
 
 	// Private Fields
 	private Camera mainCamera;
@@ -34,23 +33,18 @@ public class WeightPackingLevelManager : MonoBehaviour
 	private void OnEnable()
 	{
 		levelRevealedListener.OnEnable();
-		weightPackedListener.OnEnable();
-		weightLeftPackedListener.OnEnable();
+		correctWeightPackedListener.OnEnable();
 	}
 	private void OnDisable()
 	{
 		levelRevealedListener.OnDisable();
-		weightPackedListener.OnDisable();
-		weightLeftPackedListener.OnDisable();
+		correctWeightPackedListener.OnDisable();
 	}
 
 	private void Awake()
 	{
 		levelRevealedListener.response = LevelRevealedResponse;
-		weightPackedListener.response = WeightPackedResponse;
-		weightLeftPackedListener.response = WeightPackedResponse;
-
-		weightCount = 0;
+		correctWeightPackedListener.response = WeightPackedResponse;
 
 		mainCamera = Camera.main;
 
@@ -68,7 +62,7 @@ public class WeightPackingLevelManager : MonoBehaviour
 	{
 		packedWeightCount++;
 
-		levelProgress.Value = packedWeightCount / ( float )weightCount;
+		levelProgress.Value = packedWeightCount / ( float )weightCount; ;
 
 		if( packedWeightCount >= weightCount )
 		{

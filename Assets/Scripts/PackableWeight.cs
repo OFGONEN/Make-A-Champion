@@ -5,23 +5,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using FFStudio;
 using DG.Tweening;
+using Lean.Touch;
 
 public class PackableWeight : MonoBehaviour
 {
 	#region Fields
+	[Header( "Event Listener" )]
+	public EventListenerDelegateResponse failAnimationListener;
 	[Header( "Fired Events" )]
-	public GameEvent weightPacked;
+	public IntGameEvent weightPacked;
 
 	[Header( " Shared Variables" )]
 	public GameSettings gameSettings;
-	public PackingTarget weightTarget;
+	public WeightTarget weightTarget;
 	public SharedReferance targetReferance;
 
 	//Public Fields
+	public int weightIndex;
 	public float lookAtSpeed;
 	[HideInInspector] public BoxCollider selectionCollider;
 
 	//Private Fields
+	LeanDragTranslate leanDragTranslate;
 	TweenCallback onLateUpdate;
 	TweenCallback onDeSelect;
 
@@ -30,20 +35,31 @@ public class PackableWeight : MonoBehaviour
 	#endregion
 
 	#region Unity API
+	private void OnEnable()
+	{
+		failAnimationListener.OnEnable();
+	}
+
+	private void OnDisable()
+	{
+		failAnimationListener.OnDisable();
+	}
 	private void Awake()
 	{
+		failAnimationListener.response = () =>
+		{
+			selectionCollider.enabled = false;
+		};
+
 		selectionCollider = GetComponent<BoxCollider>();
+		leanDragTranslate = GetComponent<LeanDragTranslate>();
 
 		startPosition = transform.position;
 		startRotation = transform.rotation.eulerAngles;
 
 		onLateUpdate = ExtensionMethods.EmptyMethod;
 
-	}
-
-	private void Start()
-	{
-		WeightPackingLevelManager.weightCount++;
+		leanDragTranslate.enabled = false;
 	}
 
 	private void LateUpdate()
@@ -55,6 +71,7 @@ public class PackableWeight : MonoBehaviour
 	#region API
 	public void OnSelect()
 	{
+		leanDragTranslate.enabled = true;
 		onLateUpdate = CheckDistance;
 	}
 
@@ -63,6 +80,7 @@ public class PackableWeight : MonoBehaviour
 		FFLogger.Log( "DeSelect:" + name );
 		onLateUpdate = ExtensionMethods.EmptyMethod;
 		selectionCollider.enabled = false;
+		leanDragTranslate.enabled = false;
 
 		weightTarget.DeSelect();
 		onDeSelect();
@@ -109,7 +127,13 @@ public class PackableWeight : MonoBehaviour
 	void GoTarget()
 	{
 		var target = targetReferance.sharedValue as Transform;
-		transform.DOMove( target.position, 0.5f ).OnComplete( weightPacked.Raise );
+		transform.DOMove( target.position, 0.5f ).OnComplete( () =>
+		{
+			weightPacked.eventValue = weightIndex;
+			weightPacked.Raise();
+
+			transform.SetParent( target.parent );
+		} );
 	}
 	#endregion
 }

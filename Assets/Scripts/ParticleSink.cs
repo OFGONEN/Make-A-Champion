@@ -26,6 +26,7 @@ public class ParticleSink : MonoBehaviour
 	//Private Fields
 	private new ParticleSystem particleSystem;
 	private BoxCollider selectionCollider;
+	private LeanDragTranslate leanDragTranslate;
 	private TweenCallback lateUpdate;
 	private TweenCallback onDeSelect;
 	private Tween movementTween;
@@ -54,8 +55,10 @@ public class ParticleSink : MonoBehaviour
     {
 		particleSystem = GetComponent< ParticleSystem >();
 		selectionCollider = GetComponentInChildren< BoxCollider >();
+		leanDragTranslate = GetComponentInChildren<LeanDragTranslate>();
 
 		selectionCollider.enabled = false;
+		leanDragTranslate.enabled = false;
 
 		lateUpdate = ExtensionMethods.EmptyMethod;
 
@@ -94,6 +97,7 @@ public class ParticleSink : MonoBehaviour
 	{
 		FFLogger.Log( name + " Selected!" );
 
+		leanDragTranslate.enabled = true;
 		movementTween = DOTween.To( () => hoverValue, x => hoverValue = x, startPosition.y + 0.25f, 0.25f );
 
 		transform.DORotate( hoverRotation, 0.5f );
@@ -106,6 +110,7 @@ public class ParticleSink : MonoBehaviour
 	public void OnDeselect()
 	{
 		FFLogger.Log( name + " Deselected!" );
+		leanDragTranslate.enabled = false;
 
 		onDeSelect();
 	}

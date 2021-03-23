@@ -24,7 +24,7 @@ MonoBehaviour:
   bubbleDestroyTweenDuration: 1
   cameraTravelDuration: 1.5
   packingItemSearchDistance: 3
-  packingWeightSearchDistance: 1.5
+  packingWeightSearchDistance: 1.75
   weightLoopFailTime: 3
   weightLoopGreenValue: 0.35
   weightLoopYellowValue: 0.2
