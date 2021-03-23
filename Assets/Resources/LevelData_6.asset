@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sceneIndex: 6
   unlockedObject:
-    selectionObject: {fileID: 919132149155446097, guid: dc0eb9e6d0935bb4a85b4e5574ca8a58, type: 3}
-    position: {x: -0.41, y: 0.44, z: 0}
+    selectionObject: {fileID: 1100638773026464246, guid: cc524bf5129d7d743a7ae2948db680cf, type: 3}
+    position: {x: -0.16, y: -0.84, z: 1.29}
     scale: {x: 7, y: 7, z: 7}
   cameraStartPosition: {x: -2.9640312, y: 3.0712762, z: -1.812861}
   cameraStartRotation: {x: 32.658558, y: 57.547207, z: -0.0000020282034}
