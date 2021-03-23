@@ -26,7 +26,7 @@ MonoBehaviour:
   packingItemSearchDistance: 3
   packingWeightSearchDistance: 1.5
   weightLoopFailTime: 3
-  weightLoopGreenValue: 0.4
+  weightLoopGreenValue: 0.35
   weightLoopYellowValue: 0.2
   weightLoopRedValue: 0.2
   weightLoopComplete: 3

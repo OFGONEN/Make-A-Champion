@@ -13,6 +13,7 @@ public class UIHelperText : UIText
 	public EventListenerDelegateResponse hideTextListener;
 	public EventListenerDelegateResponse changeTextListener;
 
+	private Vector3 startScale;
 	#endregion
 
 
@@ -38,9 +39,11 @@ public class UIHelperText : UIText
 	{
 		base.Awake();
 
+		startScale = uiTransform.localScale;
+
 		uiTransform.localScale = Vector3.zero;
 
-		revealTextListener.response = () => TweenScale( Vector3.one / 2f );
+		revealTextListener.response = () => TweenScale( startScale );
 		hideTextListener.response = () => TweenScale( Vector3.zero );
 		changeTextListener.response = ChangeTextResponse;
 
@@ -65,7 +68,7 @@ public class UIHelperText : UIText
 		var changeEvet = changeTextListener.gameEvent as StringGameEvent;
 		textRenderer.text = changeEvet.eventValue;
 
-		GoPopOut();
+		TweenScale( startScale );
 	}
 
 	#endregion

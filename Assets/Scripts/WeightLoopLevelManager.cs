@@ -20,6 +20,7 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public StringGameEvent animationTriggerEvent;
 	public GameEvent levelCompleteEvent;
 	public GameEvent levelFailedEvent;
+	public StringGameEvent helperTextChangeEvent;
 
 	[Header( "UI Elements" )]
 	public UIPingPongMeter uiPingPongMeter;
@@ -92,6 +93,8 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public void PrepareGoUp()
 	{
 		FFLogger.Log( "Prepare Go Up" );
+		helperTextChangeEvent.eventValue = "Tap to Lifth the Weight";
+		helperTextChangeEvent.Raise();
 		tapInputListener.response = GoUpPushTapTiming;
 	}
 
@@ -99,6 +102,9 @@ public class WeightLoopLevelManager : MonoBehaviour
 	public void PrepareGoDown()
 	{
 		FFLogger.Log( "Prepare Go Down" );
+
+		helperTextChangeEvent.eventValue = "Tap to Lower the Weight";
+		helperTextChangeEvent.Raise();
 
 		idleStateEnteredListener.response = ExtensionMethods.EmptyMethod;
 
