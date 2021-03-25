@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
 
 		levelLoadedListener.response = LevelLoadedResponse;
 
-		levelText.textRenderer.text = "Level " + currentLevel.currentLevel;
+		levelText.textRenderer.text = "Level " + currentLevel.currentConsecutiveLevel;
 		uiItemUnlocked.transform.DOScale( Vector3.zero, 0.5f );
 
 		var sequence = DOTween.Sequence();

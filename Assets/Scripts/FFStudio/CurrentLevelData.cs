@@ -8,7 +8,8 @@ namespace FFStudio
     public class CurrentLevelData : ScriptableObject
     {
         public int currentLevel;
-        public GameSettings gameSettings;
+		public int currentConsecutiveLevel;
+		public GameSettings gameSettings;
         public LevelData levelData;
         public void LoadCurrentLevelData()
         {

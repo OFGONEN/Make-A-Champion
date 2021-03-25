@@ -72,6 +72,8 @@ public class AppManager : MonoBehaviour
 	private void LoadLevel()
 	{
 		currentLevel.currentLevel = PlayerPrefs.GetInt( "Level", 1 );
+		currentLevel.currentConsecutiveLevel = PlayerPrefs.GetInt( "Consecutive Level", 1 );
+
 		currentLevel.LoadCurrentLevelData();
 
 		cleanUpEvent.Raise();
@@ -82,7 +84,10 @@ public class AppManager : MonoBehaviour
 	private void LoadNewLevel()
 	{
 		currentLevel.currentLevel++;
+		currentLevel.currentConsecutiveLevel++;
 		PlayerPrefs.SetInt( "Level", currentLevel.currentLevel );
+		PlayerPrefs.SetInt( "Consecutive Level", currentLevel.currentConsecutiveLevel );
+
 
 		var _operation = SceneManager.UnloadSceneAsync( currentLevel.levelData.sceneIndex );
 		_operation.completed += ( AsyncOperation operation ) => LoadLevel();
