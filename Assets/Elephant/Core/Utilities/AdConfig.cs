@@ -10,6 +10,9 @@ namespace ElephantSDK
         public string mopub_keyword;
         public bool ad_callback_logs;
         public bool backup_ads_enabled;
+        public bool cross_promo_enabled;
+        public string cross_promo_ad_unit;
+        public int cross_promo_cache_size;
         public string backup_interstitial_ad_unit;
         public string backup_rewarded_ad_unit;
         public List<AdConfigParameter> parameters;
@@ -21,6 +24,9 @@ namespace ElephantSDK
             mopub_keyword = "";
             ad_callback_logs = false;
             backup_ads_enabled = false;
+            cross_promo_enabled = false;
+            cross_promo_ad_unit = "";
+            cross_promo_cache_size = 50;
             backup_interstitial_ad_unit = "";
             backup_rewarded_ad_unit = "";
             parameters = new List<AdConfigParameter>();
@@ -38,6 +44,9 @@ namespace ElephantSDK
             mopub_keyword = config.mopub_keyword ;
             ad_callback_logs = config.ad_callback_logs;
             backup_ads_enabled = config.backup_ads_enabled;
+            cross_promo_enabled = config.cross_promo_enabled;
+            cross_promo_ad_unit = config.cross_promo_ad_unit;
+            cross_promo_cache_size = config.cross_promo_cache_size;
             backup_interstitial_ad_unit = config.backup_interstitial_ad_unit;
             backup_rewarded_ad_unit = config.backup_rewarded_ad_unit;
             parameters = config.parameters;

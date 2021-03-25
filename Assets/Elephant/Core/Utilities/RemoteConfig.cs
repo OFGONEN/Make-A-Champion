@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 namespace ElephantSDK
@@ -37,6 +38,8 @@ namespace ElephantSDK
 
         private string userTag = "NOT_TAGGED";
 
+        private bool _firstOpen;
+
         public static RemoteConfig GetInstance()
         {
             if (instance == null)
@@ -73,6 +76,16 @@ namespace ElephantSDK
                 Debug.Log(e);
             }
 
+        }
+
+        public bool IsFirstOpen()
+        {
+            return _firstOpen;
+        }
+        
+        public void SetFirstOpen(bool firstOpen)
+        {
+            _firstOpen =  firstOpen;
         }
 
         public string GetTag()
@@ -140,7 +153,7 @@ namespace ElephantSDK
             if (a == null)
                 return def;
             
-            float returnVal = float.TryParse(a, out returnVal) ? returnVal : def;
+            float returnVal = float.TryParse(a,NumberStyles.Any, CultureInfo.InvariantCulture, out returnVal) ? returnVal : def;
             return returnVal;
         }
         
@@ -152,7 +165,7 @@ namespace ElephantSDK
             if (a == null)
                 return def;
             
-            double returnVal = double.TryParse(a, out returnVal) ? returnVal : def;
+            double returnVal = double.TryParse(a,NumberStyles.Any, CultureInfo.InvariantCulture, out returnVal) ? returnVal : def;
             return returnVal;
         }
     }

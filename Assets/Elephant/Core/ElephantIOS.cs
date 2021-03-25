@@ -12,11 +12,16 @@ public class ElephantIOS
     
     [DllImport ("__Internal")]
     public static extern string IDFA();
-
-
     
     [DllImport ("__Internal")]
     public static extern void ElephantPost(string url, string body, string gameID, string authToken, int tryCount);
+    
+    [DllImport ("__Internal")]
+    public static extern void showIdfaConsent(int type, string titleText, string descriptionText, 
+        string buttonText, string termsText, string policyText, string termsUrl, string policyUrl);
+    
+    [DllImport ("__Internal")]
+    public static extern string getConsentStatus();
     
     #endif
 }

@@ -76,6 +76,35 @@ namespace ElephantSDK
             ElephantCore.Instance.AddToQueue(req);
         }
 
+        public static void AdRevenueEvent(string mopubRevenueData)
+        {
+            if (ElephantCore.Instance == null)
+            {
+                Debug.LogWarning("Elephant SDK isn't working correctly, make sure you put Elephant prefab into your first scene..");
+                return;
+            }
+
+            var adRevenueRequest = AdRevenueRequest.CreateAdRevenueRequest(mopubRevenueData);
+
+            var req = new ElephantRequest(ElephantCore.AD_REVENUE_EP, adRevenueRequest);
+            ElephantCore.Instance.AddToQueue(req);
+        }
+        
+        // For IS integrated apps.
+        public static void IronsourceAdRevenueEvent(string ironsourceRevenueData)
+        {
+            if (ElephantCore.Instance == null)
+            {
+                Debug.LogWarning("Elephant SDK isn't working correctly, make sure you put Elephant prefab into your first scene..");
+                return;
+            }
+
+            var adRevenueRequest = AdRevenueRequest.CreateIronSourceAdRevenueRequest(ironsourceRevenueData);
+
+            var req = new ElephantRequest(ElephantCore.AD_REVENUE_EP, adRevenueRequest);
+            ElephantCore.Instance.AddToQueue(req);
+        }
+
         private static void CustomEvent(string type, int level, Params param = null)
         {
             if (ElephantCore.Instance == null)

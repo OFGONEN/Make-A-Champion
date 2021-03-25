@@ -39,6 +39,10 @@ namespace ElephantSdkManager.Util
         private static int[] VersionStringToInts(string version)
         {
             int piece;
+            if (version.Contains("_internal"))
+            {
+                version = version.Replace("_internal", string.Empty);
+            }
             return version.Split('.')
                 .Select(v => int.TryParse(v, NumberStyles.Any, CultureInfo.InvariantCulture, out piece) ? piece : 0)
                 .ToArray();

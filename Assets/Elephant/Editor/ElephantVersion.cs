@@ -2,6 +2,6 @@ namespace ElephantSDK
 {
     public class ElephantVersion
     {
-        internal static string SDK_VERSION = "v1.4.2";
+        internal static string SDK_VERSION = "v1.7.2";
     }
 }

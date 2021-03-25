@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using FFStudio;
 using TMPro;
 using DG.Tweening;
-// using ElephantSDK;
+using ElephantSDK;
 
 public class UIManager : MonoBehaviour
 {
@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
 	#region Implementation
 	void LevelCompleteResponse()
 	{
-		// Elephant.LevelCompleted( currentLevel.currentLevel );
+		Elephant.LevelCompleted( PlayerPrefs.GetInt("Level", 1) );
 
 		var sequence = DOTween.Sequence();
 		sequence.Append( levelText.GoStartPosition() );
@@ -109,7 +109,7 @@ public class UIManager : MonoBehaviour
 	void LevelLoadedResponse()
 	{
 		FFLogger.Log( "Level Loaded" );
-		// Elephant.LevelStarted( currentLevel.currentLevel );
+		// Elephant.LevelStarted( PlayerPrefs.GetInt("Level", 1) );
 
 		levelLoadedListener.response = LevelLoadedResponse;
 
@@ -121,11 +121,13 @@ public class UIManager : MonoBehaviour
 		sequence.AppendCallback( levelRevealed.Raise );
 		sequence.Append( levelText.GoTargetPosition() );
 		sequence.Join( uiLevelProgression.GoTargetPosition() );
+		sequence.AppendCallback( () => Debug.Log( "Level Start" ));
+		sequence.AppendCallback( () => Elephant.LevelStarted( PlayerPrefs.GetInt("Level", 1) ));
 	}
 
 	void LevelFailedResponse()
 	{
-		// Elephant.LevelFailed( currentLevel.currentLevel );
+		Elephant.LevelFailed( PlayerPrefs.GetInt("Level", 1) );
 
 		levelText.GoStartPosition();
 		uiLevelProgression.GoStartPosition();

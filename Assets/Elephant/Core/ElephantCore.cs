@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+using Facebook.Unity;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -44,6 +45,7 @@ namespace ElephantSDK
         public const string SESSION_EP = ELEPHANT_BASE_URL + "/session";
         public const string MONITORING_EP = ELEPHANT_BASE_URL + "/monitoring";
         public const string TRANSACTION_EP = ELEPHANT_BASE_URL + "/transaction";
+        public const string AD_REVENUE_EP = ELEPHANT_BASE_URL + "/adrevenue";
 
 
         private Queue<ElephantRequest> _queue = new Queue<ElephantRequest>();
@@ -60,7 +62,9 @@ namespace ElephantSDK
         private SessionData currentSession;
         internal string idfa = "";
         internal string idfv = "";
+        internal string consentStatus = "NotDetermined";
         internal string userId = "";
+        
         private OpenResponse openResponse;
 
         private static int MAX_FAILED_COUNT = 100;
@@ -81,10 +85,11 @@ namespace ElephantSDK
         public static event OnInitialized onInitialized;
         public static event OnOpenResult onOpen;
         public static event OnRemoteConfigLoaded onRemoteConfigLoaded;
+        public static event Action<string> OnConsentResult;
         
         private float _nextActionTime = 0.0f;
-        public float _period = 2.0F;
-        public float _fps;
+        private float _period = 2.0F;
+        private float _fps;
 
 
         void Awake()
@@ -158,6 +163,15 @@ namespace ElephantSDK
 
             VersionCheckUtils.GetInstance();
 
+            if (!FB.IsInitialized)
+            {
+                FB.Init(OnFbInitComplete);
+            }
+            else
+            {
+                FB.ActivateApp();
+            }
+
             this.gdprSupported = gdprSupported;
             StartCoroutine(InitSDK(isOldUser));
         }
@@ -181,7 +195,13 @@ namespace ElephantSDK
             if (savedConfig != null)
             {
                 RemoteConfig.GetInstance().Init(savedConfig);
+                RemoteConfig.GetInstance().SetFirstOpen(false);
                 openResponse.remote_config_json = savedConfig;
+            }
+            else
+            {
+                // First open 
+                RemoteConfig.GetInstance().SetFirstOpen(true);
             }
 
             openRequestWaiting = true;
@@ -216,10 +236,23 @@ namespace ElephantSDK
             AdConfig.GetInstance().Init(openResponse.ad_config);
             Utils.SaveToFile(REMOTE_CONFIG_FILE, openResponse.remote_config_json);
             Utils.SaveToFile(USER_DB_ID, openResponse.user_id);
+            userId = openResponse.user_id;
             currentSession.user_tag = RemoteConfig.GetInstance().GetTag();
 
             if (onOpen != null)
             {
+#if UNITY_IOS && !UNITY_EDITOR
+                if (InternalConfig.GetInstance().idfa_consent_enabled)
+                {
+                    InternalConfig internalConfig = InternalConfig.GetInstance();
+                    
+                    ElephantIOS.showIdfaConsent(internalConfig.idfa_consent_type,
+                        internalConfig.consent_text_body, internalConfig.consent_text_action_body,
+                        internalConfig.consent_text_action_button, internalConfig.terms_of_service_text,
+                        internalConfig.privacy_policy_text, internalConfig.terms_of_service_url,
+                        internalConfig.privacy_policy_url);    
+                }
+#endif
                 if (openResponse.consent_required)
                 {
                     onOpen(true);
@@ -252,6 +285,15 @@ namespace ElephantSDK
             
             Elephant.Event("elephant_sdk_versions_info", -1, parameters);
         }
+
+        private void OnFbInitComplete()
+        {
+            if (FB.IsInitialized) {
+                FB.ActivateApp();
+            } else {
+                Debug.Log("Failed to Initialize the Facebook SDK");
+            }
+        }
         
         public OpenResponse GetOpenResponse()
         {
@@ -266,11 +308,15 @@ namespace ElephantSDK
             StartCoroutine(OpenRequest(isOldUser));
 #elif UNITY_IOS
             idfa = ElephantIOS.IDFA();
+            consentStatus = ElephantIOS.getConsentStatus();
+            Debug.Log("Native IDFA -> " + idfa);
+            StartCoroutine(OpenRequest(isOldUser));
+#elif UNITY_ANDROID
+            idfa = ElephantAndroid.FetchAdId();
             Debug.Log("Native IDFA -> " + idfa);
             StartCoroutine(OpenRequest(isOldUser));
 #else
-            idfa = ElephantAndroid.FetchAdId();
-            Debug.Log("Native IDFA -> " + idfa);
+            idfa = "UNITY_UNKOWN_IDFA";
             StartCoroutine(OpenRequest(isOldUser));
 #endif
         }
@@ -562,7 +608,7 @@ namespace ElephantSDK
         // No-op for Android.
         private void ReportLatestCrashLog()
         {
-            if (!InternalConfig.GetInstance().monitoring_enabled) return;
+            if (!InternalConfig.GetInstance().crash_log_enabled) return;
             
             var report = CrashReport.lastReport;
             if (report == null) return;
@@ -575,9 +621,38 @@ namespace ElephantSDK
         
         private void OnLowMemory()
         {
-            if (!InternalConfig.GetInstance().monitoring_enabled) return;
+            if (!InternalConfig.GetInstance().low_memory_logging_enabled) return;
             
             Elephant.Event("Application_low_memory", MonitoringUtils.GetInstance().GetCurrentLevel());
+        }
+        
+        void setConsentStatus(string message)
+        {
+#if UNITY_IOS && !UNITY_EDITOR
+            idfa = ElephantIOS.IDFA();
+#endif
+            triggerConsentResult(message);
+            var parameters = Params.New();
+            parameters.Set("status", message);
+            Elephant.Event("idfa_consent_change", -1, parameters);
+            consentStatus = message;
+        }
+        
+        void sendUiConsentStatus(string message)
+        {
+            if (message.Equals("denied"))
+            {
+                triggerConsentResult(message);
+            }
+            var parameters = Params.New();
+            parameters.Set("status", message);
+            Elephant.Event("idfa_ui_consent_change", -1, parameters);
+            consentStatus = message;
+        }
+
+        void triggerConsentResult(string message)
+        {
+            OnConsentResult?.Invoke(message);
         }
     }
 }

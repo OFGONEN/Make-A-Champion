@@ -272,7 +272,7 @@ namespace ElephantSDK
             playTxt.AddComponent<CanvasRenderer>();
             playTxt.transform.SetParent(playBtn.transform);
             var text = playTxt.AddComponent<Text>();
-            text.font = Resources.Load<Font>("ProximaNova-Bold");
+            text.font = Resources.Load<Font>("Roboto-Bold");
             text.text = "BACK";
             text.alignment = TextAnchor.MiddleCenter;
             text.color = Color.white;
@@ -327,7 +327,7 @@ namespace ElephantSDK
             playTxt.AddComponent<CanvasRenderer>();
             playTxt.transform.SetParent(playBtn.transform);
             var text = playTxt.AddComponent<Text>();
-            text.font = Resources.Load<Font>("ProximaNova-Bold");
+            text.font = Resources.Load<Font>("Roboto-Bold");
             text.text = "PLAY";
             text.alignment = TextAnchor.MiddleCenter;
             text.color = Color.white;
@@ -375,7 +375,7 @@ namespace ElephantSDK
 
             optionText.AddComponent<CanvasRenderer>();
             var text = optionText.AddComponent<Text>();
-            text.font = Resources.Load<Font>("ProximaNova-Regular");
+            text.font = Resources.Load<Font>("Roboto-Regular");
             text.text = optionContentString;
 
             text.supportRichText = true;
@@ -532,7 +532,7 @@ namespace ElephantSDK
 
             mainContent.AddComponent<CanvasRenderer>();
             var text = mainContent.AddComponent<Text>();
-            text.font = Resources.Load<Font>("ProximaNova-Regular");
+            text.font = Resources.Load<Font>("Roboto-Regular");
             text.text = mainText;
             text.lineSpacing = 1.2f;
 //            text.verticalOverflow = VerticalWrapMode.Overflow;

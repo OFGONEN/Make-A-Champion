@@ -27,6 +27,8 @@ namespace ElephantSDK
         public long create_date;
         public long session_id;
         public string timezone_offset = "";
+        public string user_id;
+        public string consent_status = "";
 
         public void FillBaseData(long sessionID)
         {
@@ -42,6 +44,8 @@ namespace ElephantSDK
                 this.device_model = SystemInfo.deviceModel;
                 this.create_date = Utils.Timestamp();
                 this.session_id = sessionID;
+                this.user_id = ElephantCore.Instance.userId;
+                this.consent_status = ElephantCore.Instance.consentStatus;
 
                 try
                 {

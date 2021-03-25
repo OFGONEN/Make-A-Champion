@@ -1,5 +1,8 @@
 #import "ElephantController.h"
+#import "IdfaConsentViewController.h"
 #import <AdSupport/AdSupport.h>
+#import <AppTrackingTransparency/AppTrackingTransparency.h>
+
 
 @implementation ElephantController
 
@@ -8,6 +11,61 @@
 void TestFunction(const char * a){
     if(a != nullptr)
         NSLog(@"From Unity -> %s", a);
+}
+
+void showIdfaConsent(int type, const char * titleText,
+                     const char * descriptionText,
+                     const char * buttonText,
+                     const char * termsText,
+                     const char * policyText,
+                     const char * termsUrl,
+                     const char * policyUrl) {
+    const char * titleTextCopy = ElephantCopyString(titleText);
+    const char * descriptionTextCopy = ElephantCopyString(descriptionText);
+    const char * buttonTextCopy = ElephantCopyString(buttonText);
+    const char * termsTextCopy = ElephantCopyString(termsText);
+    const char * policyTextCopy = ElephantCopyString(policyText);
+    const char * termsUrlCopy = ElephantCopyString(termsUrl);
+    const char * policyUrlCopy = ElephantCopyString(policyUrl);
+    
+    NSString *title = [NSString stringWithCString:titleTextCopy encoding:NSUTF8StringEncoding];
+    NSString *description = [NSString stringWithCString:descriptionTextCopy encoding:NSUTF8StringEncoding];
+    NSString *button = [NSString stringWithCString:buttonTextCopy encoding:NSUTF8StringEncoding];
+    NSString *terms = [NSString stringWithCString:termsTextCopy encoding:NSUTF8StringEncoding];
+    NSString *policy = [NSString stringWithCString:policyTextCopy encoding:NSUTF8StringEncoding];
+    NSString *termsUrlString = [NSString stringWithCString:termsUrlCopy encoding:NSUTF8StringEncoding];
+    NSString *policyUrlString = [NSString stringWithCString:policyUrlCopy encoding:NSUTF8StringEncoding];
+    
+    dispatch_async(dispatch_get_main_queue(), ^(void){
+        if (@available(iOS 14.0, *)) {
+            
+            NSString * status = [NSString stringWithUTF8String:getConsentStatus()];
+            if ([status isEqualToString:@"NotDetermined"]) {
+                IdfaConsentViewController *viewController = [IdfaConsentViewController sharedInstance];
+                switch (type) {
+                    case 0:
+                        [viewController requstPermissionForAppTracking];
+                        break;
+                    case 1:
+                        [viewController presentConsentView];
+                        break;
+                    case 2:
+                        [viewController presentConsentView2];
+                        break;
+                    case 3:
+                        [viewController presentConsentView3:title :description :button :terms :policy :termsUrlString :policyUrlString];
+                        break;
+                    default:
+                        [viewController requstPermissionForAppTracking];
+                        break;
+                }
+            } else {
+                UnitySendMessage("Elephant", "triggerConsentResult", status.UTF8String);
+            }
+        } else {
+            UnitySendMessage("Elephant", "triggerConsentResult", "");
+        }
+    });
 }
 
 const char* IDFA(){
@@ -19,6 +77,31 @@ const char* IDFA(){
     } else {
         return ElephantCopyString(a);
     }
+}
+
+const char* getConsentStatus(){
+    NSString *statusText = @"NotDetermined";
+    if (@available(iOS 14.0, *)) {
+       ATTrackingManagerAuthorizationStatus status = [ATTrackingManager trackingAuthorizationStatus];
+       switch (status) {
+           case ATTrackingManagerAuthorizationStatusAuthorized:
+               statusText = @"Authorized";
+               break;
+           case ATTrackingManagerAuthorizationStatusDenied:
+               statusText = @"Denied";
+               break;
+           case ATTrackingManagerAuthorizationStatusRestricted:
+               statusText = @"Restricted";
+               break;
+           case ATTrackingManagerAuthorizationStatusNotDetermined:
+               statusText = @"NotDetermined";
+               break;
+           default:
+               statusText = @"NotDetermined";
+               break;
+       }
+    }
+    return ElephantCopyString(statusText.UTF8String);
 }
 
 void ElephantPost(const char * _url, const char * _body, const char * _gameID, const char * _authToken, int tryCount){
@@ -70,7 +153,14 @@ void ElephantPost(const char * _url, const char * _body, const char * _gameID, c
                             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:failedReq options:NSJSONWritingPrettyPrinted error:nil];
                             NSString *jsonSt = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
                             UnitySendMessage("Elephant", "FailedRequest", [jsonSt cStringUsingEncoding:NSUTF8StringEncoding]);
-                }
+                } else {
+                   if (data != nil &&  data.length > 0) {
+                       NSData *jsonData = data;
+                       NSString *jsonSt = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                       UnitySendMessage("RLAdvertisementManager", "SuccessResponse", [jsonSt cStringUsingEncoding:NSUTF8StringEncoding]);
+                   }
+                   
+               }
                 
             }];
 

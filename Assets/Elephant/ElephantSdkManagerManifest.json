@@ -3,7 +3,7 @@
     {
       "downloadUrl": "https://elephant-sdks.s3.amazonaws.com/ElephantSDK.unitypackage",
       "sdkName": "Elephant",
-      "version": "v1.4.2",
+      "version": "v1.7.2",
       "type": "internal"
     }
   ]

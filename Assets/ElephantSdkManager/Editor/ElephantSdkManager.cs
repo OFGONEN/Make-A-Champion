@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using ElephantSdkManager.Model;
 using ElephantSdkManager.Util;
 using UnityEditor;
@@ -88,7 +89,24 @@ namespace ElephantSdkManager
                         .Select(group => group.ToList())
                         .ToList();
 
-                    PopulateGroupSdks(groupedSdkList[0], "Elephant SDKs");
+                   foreach (var groupSdk in groupedSdkList)
+                   {
+                       switch (groupSdk[0].type)
+                       {
+                           case "internal":
+                               PopulateGroupSdks(groupSdk, "Elephant SDKs");
+                               break;
+                           case "mopub":
+                               PopulateGroupSdks(groupSdk, "MoPub");
+                               break;
+                           case "network":
+                               PopulateGroupSdks(groupSdk, "Networks");
+                               break;
+                           default:
+                               PopulateGroupSdks(groupSdk, "Elephant SDKs");
+                               break;
+                       }
+                   }
                 }
             }
 
@@ -265,8 +283,22 @@ namespace ElephantSdkManager
         {
             yield return null;
             _activity = "Downloading SDK version manifest...";
-
-            var unityWebRequest = new UnityWebRequest(ManifestSource.ManifestURL)
+            
+            string elephantSettingsPage = Application.dataPath + "/Resources/ElephantSettings.asset";
+            string gameId = "";
+            if (File.Exists(elephantSettingsPage))
+            {
+                string[] lines = File.ReadAllLines(elephantSettingsPage);
+                foreach (var line in lines)
+                {
+                    if (line.Contains("GameID"))
+                    {
+                        gameId = line.Replace("  GameID: ", "");
+                    }
+                }
+            }
+            
+            var unityWebRequest = new UnityWebRequest(ManifestSource.ManifestURL + gameId)
             {
                 downloadHandler = new DownloadHandlerBuffer(),
                 timeout = 10,
@@ -312,7 +344,7 @@ namespace ElephantSdkManager
                     {
                         var fieldInfo = type.GetField("SDK_VERSION",
                             BindingFlags.NonPublic | BindingFlags.Static);
-                        var adsSDK = _sdkList.Find(sdk => sdk.sdkName.Equals("RollicGames"));
+                        var adsSDK = _sdkList.Find(sdk => sdk.sdkName.Equals("Rollic Ads"));
                         if (!(fieldInfo is null)) adsSDK.currentVersion = fieldInfo.GetValue(null).ToString();
                     }
                 }
@@ -338,8 +370,63 @@ namespace ElephantSdkManager
                 {
                     var fieldInfo = type.GetField("SDK_VERSION",
                         BindingFlags.NonPublic | BindingFlags.Static);
-                    var adsSDK = _sdkList.Find(sdk => sdk.sdkName.Equals("RollicGames"));
+                    var adsSDK = _sdkList.Find(sdk => sdk.sdkName.Equals("Rollic Ads"));
                     if (!(fieldInfo is null)) adsSDK.currentVersion = fieldInfo.GetValue(null).ToString();
+                }
+                
+                var mopubSdk = _sdkList.Find(sdk => sdk.sdkName.Equals("MoPub"));
+                if (mopubSdk != null)
+                {
+                    string mopubPath = Application.dataPath + "/Mopub/Scripts/Mopub.cs";
+                    if (File.Exists(mopubPath))
+                    {
+                        string[] lines = File.ReadAllLines(mopubPath);
+                        foreach (var line in lines)
+                        {
+                            if (line.Contains("public const string MoPubSdkVersion"))
+                            {
+                                Regex regex = new Regex("\"(.*?)\"");
+    
+                                var matches = regex.Matches(line);
+                                
+                                if (matches.Count > 0)
+                                {
+                                    var mopubVersion = matches[0].Value;
+                                    mopubVersion = mopubVersion.Replace("\"", "");
+                                    mopubSdk.currentVersion = mopubVersion;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            var types = myAssembly.GetTypes();
+            var packageConfigTypes = 
+                types.Where(packageConfigType => packageConfigType.Name.Contains("PackageConfig")).ToList();
+            if (packageConfigTypes.Count > 0)
+            {
+                foreach (var packageConfigType in packageConfigTypes)
+                {
+                    var version = "";
+                    var name = "";
+                    var versionMethodInfo = packageConfigType.GetMethod("get_Version");
+                    if (versionMethodInfo != null)
+                    {
+                        var classInstance = Activator.CreateInstance(packageConfigType, null);
+                        version = (string) versionMethodInfo.Invoke(classInstance, null);
+                    }
+                    var nameMethodInfo = packageConfigType.GetMethod("get_Name");
+                    if (nameMethodInfo != null)
+                    {
+                        var classInstance = Activator.CreateInstance(packageConfigType, null);
+                        name = (string) nameMethodInfo.Invoke(classInstance, null);
+                    }
+                    var networkSdk = _sdkList.Find(sdk => sdk.sdkName.Equals(name));
+                    if (networkSdk != null)
+                    {
+                        networkSdk.currentVersion = version;
+                    }
                 }
             }
 
@@ -416,9 +503,20 @@ namespace ElephantSdkManager
             {
                 if (Directory.Exists(AssetsPathPrefix + sdkInfo.sdkName))
                 {
-                    FileUtil.DeleteFileOrDirectory(AssetsPathPrefix + sdkInfo.sdkName);
+                    if (!string.Equals(sdkInfo.sdkName, "MoPub"))
+                    {
+                        FileUtil.DeleteFileOrDirectory(AssetsPathPrefix + sdkInfo.sdkName);
+                    }
                 }
 
+                if (sdkInfo.sdkName.Equals("Rollic Ads"))
+                {
+                    if (Directory.Exists(AssetsPathPrefix + "RollicGames"))
+                    {
+                        FileUtil.DeleteFileOrDirectory(AssetsPathPrefix + "RollicGames");
+                    }
+                }
+                
                 AssetDatabase.ImportPackage(path, true);
                 FileUtil.DeleteFileOrDirectory(path);
             }
