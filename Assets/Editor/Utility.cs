@@ -25,10 +25,11 @@ namespace FFEditor
         {
             PlayerPrefs.DeleteAll();
         }
-        [MenuItem("FFStudios/Save All Assets")]
+		[MenuItem( "FFStudios/Save All Assets _F12" )]
         static void SaveAllAssets()
         {
-            AssetDatabase.SaveAssets();
+			Debug.Log( " All Assets Saved!" );
+			AssetDatabase.SaveAssets();
         }
 
         [MenuItem("FFStudios/DOTween Kill All")]

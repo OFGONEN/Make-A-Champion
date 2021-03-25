@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d061da26f721d24a9def3f2749d8f75, type: 3}
+  m_Name: LevelData_4
+  m_EditorClassIdentifier: 
+  sceneIndex: 2
+  unlockedObject:
+    selectionObject: {fileID: 1236129688180544814, guid: 00ab3762f108169479aaa88a285baecc, type: 3}
+    position: {x: 0.42, y: -0.59, z: 0.44}
+    scale: {x: 750, y: 750, z: 750}
+  cameraStartPosition: {x: -4.671, y: 3.927, z: -9.67}
+  cameraStartRotation: {x: 19.080004, y: 7.2000046, z: 0.028999943}
+  cameraEndPosition: {x: 1.451, y: 4.433, z: -3.883}
+  cameraEndRotation: {x: 19.3, y: 73.40001, z: 0.0000027138358}
+  selectionObjects:
+  - selectionObject: {fileID: 3842447310066725984, guid: ea5ffacd40801e54aa25892c1f3b1c21, type: 3}
+    position: {x: -0.44, y: 0.43, z: 0}
+    scale: {x: 125, y: 125, z: 125}
+  - selectionObject: {fileID: 1236129688180544814, guid: 00ab3762f108169479aaa88a285baecc, type: 3}
+    position: {x: -0.57, y: -1.2, z: 0.44}
+    scale: {x: 900, y: 900, z: 900}
+  - selectionObject: {fileID: 1236129688180544814, guid: 00ab3762f108169479aaa88a285baecc, type: 3}
+    position: {x: -0.57, y: -1.2, z: 0.44}
+    scale: {x: 900, y: 900, z: 900}

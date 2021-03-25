@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea3c0b9fd00fd441b6cebc5941ee13b, type: 3}
+  m_Name: LevelData_3
+  m_EditorClassIdentifier: 
+  sceneIndex: 3
+  unlockedObject:
+    selectionObject: {fileID: 464486700652643716, guid: 413b31c3bd55047459817efa71647f9f, type: 3}
+    position: {x: -0.12, y: -0.13, z: 1.43}
+    scale: {x: 8, y: 8, z: 8}
+  cameraStartPosition: {x: -4.671, y: 3.927, z: -9.67}
+  cameraStartRotation: {x: 19.080004, y: 7.2000046, z: 0.028999943}
+  cameraEndPosition: {x: 1.451, y: 4.433, z: -3.883}
+  cameraEndRotation: {x: 19.3, y: 73.40001, z: 0.0000027138358}
