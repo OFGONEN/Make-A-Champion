@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using FFStudio;
 using TMPro;
 using DG.Tweening;
+// using ElephantSDK;
 
 public class UIManager : MonoBehaviour
 {
@@ -89,6 +90,8 @@ public class UIManager : MonoBehaviour
 	#region Implementation
 	void LevelCompleteResponse()
 	{
+		// Elephant.LevelCompleted( currentLevel.currentLevel );
+
 		var sequence = DOTween.Sequence();
 		sequence.Append( levelText.GoStartPosition() );
 		sequence.Join( uiLevelProgression.GoStartPosition() );
@@ -106,6 +109,7 @@ public class UIManager : MonoBehaviour
 	void LevelLoadedResponse()
 	{
 		FFLogger.Log( "Level Loaded" );
+		// Elephant.LevelStarted( currentLevel.currentLevel );
 
 		levelLoadedListener.response = LevelLoadedResponse;
 
@@ -121,6 +125,8 @@ public class UIManager : MonoBehaviour
 
 	void LevelFailedResponse()
 	{
+		// Elephant.LevelFailed( currentLevel.currentLevel );
+
 		levelText.GoStartPosition();
 		uiLevelProgression.GoStartPosition();
 
