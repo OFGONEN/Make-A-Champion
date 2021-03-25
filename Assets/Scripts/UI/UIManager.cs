@@ -90,7 +90,7 @@ public class UIManager : MonoBehaviour
 	#region Implementation
 	void LevelCompleteResponse()
 	{
-		Elephant.LevelCompleted( PlayerPrefs.GetInt("Level", 1) );
+		Elephant.LevelCompleted( PlayerPrefs.GetInt("Consecutive Level", 1) );
 
 		var sequence = DOTween.Sequence();
 		sequence.Append( levelText.GoStartPosition() );
@@ -122,12 +122,12 @@ public class UIManager : MonoBehaviour
 		sequence.Append( levelText.GoTargetPosition() );
 		sequence.Join( uiLevelProgression.GoTargetPosition() );
 		sequence.AppendCallback( () => Debug.Log( "Level Start" ));
-		sequence.AppendCallback( () => Elephant.LevelStarted( PlayerPrefs.GetInt("Level", 1) ));
+		sequence.AppendCallback( () => Elephant.LevelStarted( PlayerPrefs.GetInt("Consecutive Level", 1) ));
 	}
 
 	void LevelFailedResponse()
 	{
-		Elephant.LevelFailed( PlayerPrefs.GetInt("Level", 1) );
+		Elephant.LevelFailed( PlayerPrefs.GetInt("Consecutive Level", 1) );
 
 		levelText.GoStartPosition();
 		uiLevelProgression.GoStartPosition();
